@@ -167,16 +167,16 @@ export const CheckoutForm: React.FC<{}> = () => {
             placeholder="Phone Number"
           />
         </div>
+        <div className={classes.actions}>
+          <Button label="Back to cart" href="/cart" appearance="secondary" />
+          <Button
+            label={isLoading ? 'Loading...' : 'Confirm Order'}
+            type="submit"
+            appearance="primary"
+            disabled={isLoading}
+          />
+        </div>
       </form>
-      <div className={classes.actions}>
-        <Button label="Back to cart" href="/cart" appearance="secondary" />
-        <Button
-          label={isLoading ? 'Loading...' : 'Confirm Order'}
-          type="submit"
-          appearance="primary"
-          disabled={isLoading}
-        />
-      </div>
     </div>
   )
 }
