@@ -29,7 +29,7 @@ export default async function Login() {
           <div className={classes.formTitle}>
             <h3>Welcome</h3>
           </div>
-          <p>Please Login Here</p>
+          <p>Please login or create an account to checkout & track your order.</p>
 
           <LoginForm />
         </div>
