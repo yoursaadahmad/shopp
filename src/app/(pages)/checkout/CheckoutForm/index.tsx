@@ -72,11 +72,12 @@ export const CheckoutForm: React.FC<{}> = () => {
   )
 
   return (
-    <div className={classes.newform}>
+    <div className={classes.form}>
       <span className={classes.newspan}>Fill Your Information. Pay with cash on delivery</span>
-      <form onSubmit={handleSubmit} className={classes.form}>
+      <form onSubmit={handleSubmit} className={classes.newform}>
         {error && <Message error={error} />}
-        <div>
+
+        <div className="form-item">
           <label>First Name</label>
           <input
             type="text"
@@ -84,9 +85,10 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, firstname: e.target.value })}
             required
             className={classes.newform}
+            placeholder="First Name"
           />
         </div>
-        <div>
+        <div className="form-item">
           <label>Last Name</label>
           <input
             type="text"
@@ -94,9 +96,11 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, lastname: e.target.value })}
             required
             className={classes.newform}
+            placeholder="Last Name"
           />
         </div>
-        <div>
+
+        <div className="form-item">
           <label>Address Line 1</label>
           <input
             type="text"
@@ -104,18 +108,21 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, line1: e.target.value })}
             required
             className={classes.newform}
+            placeholder="Address Line 1"
           />
         </div>
-        <div>
+        <div className="form-item">
           <label>Address Line 2</label>
           <input
             type="text"
             value={address.line2}
             onChange={e => setAddress({ ...address, line2: e.target.value })}
             className={classes.newform}
+            placeholder="Address Line 2"
           />
         </div>
-        <div>
+
+        <div className="form-item">
           <label>City</label>
           <input
             type="text"
@@ -123,9 +130,10 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, city: e.target.value })}
             required
             className={classes.newform}
+            placeholder="City"
           />
         </div>
-        <div>
+        <div className="form-item">
           <label>Postal Code</label>
           <input
             type="text"
@@ -133,9 +141,11 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, postalCode: e.target.value })}
             required
             className={classes.newform}
+            placeholder="Postal Code"
           />
         </div>
-        <div>
+
+        <div className="form-item">
           <label>Country</label>
           <input
             type="text"
@@ -143,9 +153,10 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setAddress({ ...address, country: e.target.value })}
             required
             className={classes.newform}
+            placeholder="Country"
           />
         </div>
-        <div>
+        <div className="form-item">
           <label>Phone Number</label>
           <input
             type="tel"
@@ -153,18 +164,19 @@ export const CheckoutForm: React.FC<{}> = () => {
             onChange={e => setPhone(e.target.value)}
             required
             className={classes.newform}
-          />
-        </div>
-        <div className={classes.actions}>
-          <Button label="Back to cart" href="/cart" appearance="secondary" />
-          <Button
-            label={isLoading ? 'Loading...' : 'Confirm Order'}
-            type="submit"
-            appearance="primary"
-            disabled={isLoading}
+            placeholder="Phone Number"
           />
         </div>
       </form>
+      <div className={classes.actions}>
+        <Button label="Back to cart" href="/cart" appearance="secondary" />
+        <Button
+          label={isLoading ? 'Loading...' : 'Confirm Order'}
+          type="submit"
+          appearance="primary"
+          disabled={isLoading}
+        />
+      </div>
     </div>
   )
 }
