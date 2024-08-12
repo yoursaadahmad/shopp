@@ -26,33 +26,55 @@ export const AddToCartButton: React.FC<{
     setIsInCart(isProductInCart(product))
   }, [isProductInCart, product, cart])
 
-  return (
-    <Button
-      href={isInCart ? '/cart' : undefined}
-      type={!isInCart ? 'button' : undefined}
-      label={isInCart ? `✓ View in cart` : `Add to cart`}
-      el={isInCart ? 'link' : undefined}
-      appearance={appearance}
-      className={[
-        className,
-        classes.addToCartButton,
-        appearance === 'default' && isInCart && classes.green,
-        !hasInitializedCart && classes.hidden,
-      ]
-        .filter(Boolean)
-        .join(' ')}
-      onClick={
-        !isInCart
-          ? () => {
-              addItemToCart({
-                product,
-                quantity,
-              })
+  // Function to handle direct checkout
+  const handleDirectCheckout = () => {
+    if (!isInCart) {
+      addItemToCart({
+        product,
+        quantity,
+      })
+    }
+    router.push('/checkout')
+  }
 
-              router.push('/cart')
-            }
-          : undefined
-      }
-    />
+  return (
+    <div className={className}>
+      <Button
+        href={isInCart ? '/cart' : undefined}
+        type={!isInCart ? 'button' : undefined}
+        label={isInCart ? `✓ View in cart` : `Add to cart`}
+        el={isInCart ? 'link' : undefined}
+        appearance={appearance}
+        className={[
+          classes.addToCartButton,
+          appearance === 'default' && isInCart && classes.green,
+          !hasInitializedCart && classes.hidden,
+        ]
+          .filter(Boolean)
+          .join(' ')}
+        onClick={
+          !isInCart
+            ? () => {
+                addItemToCart({
+                  product,
+                  quantity,
+                })
+                router.push('/cart')
+              }
+            : undefined
+        }
+      />
+
+      {/* Direct Checkout Button */}
+      <Button
+        type="button"
+        label="Buy Now"
+        appearance="secondary" // Use a different appearance for distinction
+        className={[classes.addToCartButton, !hasInitializedCart && classes.hidden]
+          .filter(Boolean)
+          .join(' ')}
+        onClick={handleDirectCheckout}
+      />
+    </div>
   )
 }

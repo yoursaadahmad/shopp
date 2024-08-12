@@ -4,6 +4,7 @@ import React, { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '../../../_components/Button'
+import { HR } from '../../../_components/HR'
 import { Message } from '../../../_components/Message'
 import { priceFromJSON } from '../../../_components/Price'
 import { useCart } from '../../../_providers/Cart'
@@ -14,6 +15,7 @@ export const CheckoutForm: React.FC<{}> = () => {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [address, setAddress] = useState({
+    email: '',
     firstname: '',
     lastname: '',
     line1: '',
@@ -77,8 +79,17 @@ export const CheckoutForm: React.FC<{}> = () => {
       <form onSubmit={handleSubmit} className={classes.newform}>
         {error && <Message error={error} />}
 
+        <div className="formEmail">
+          <input
+            type="text"
+            value={address.email}
+            onChange={e => setAddress({ ...address, email: e.target.value })}
+            required
+            className={classes.newform}
+            placeholder="Email Address"
+          />
+        </div>
         <div className="form-item">
-          <label>First Name</label>
           <input
             type="text"
             value={address.firstname}
@@ -89,7 +100,6 @@ export const CheckoutForm: React.FC<{}> = () => {
           />
         </div>
         <div className="form-item">
-          <label>Last Name</label>
           <input
             type="text"
             value={address.lastname}
@@ -101,7 +111,6 @@ export const CheckoutForm: React.FC<{}> = () => {
         </div>
 
         <div className="form-item">
-          <label>Address Line 1</label>
           <input
             type="text"
             value={address.line1}
@@ -112,7 +121,6 @@ export const CheckoutForm: React.FC<{}> = () => {
           />
         </div>
         <div className="form-item">
-          <label>Address Line 2</label>
           <input
             type="text"
             value={address.line2}
@@ -123,7 +131,6 @@ export const CheckoutForm: React.FC<{}> = () => {
         </div>
 
         <div className="form-item">
-          <label>City</label>
           <input
             type="text"
             value={address.city}
@@ -134,7 +141,6 @@ export const CheckoutForm: React.FC<{}> = () => {
           />
         </div>
         <div className="form-item">
-          <label>Postal Code</label>
           <input
             type="text"
             value={address.postalCode}
@@ -146,7 +152,6 @@ export const CheckoutForm: React.FC<{}> = () => {
         </div>
 
         <div className="form-item">
-          <label>Country</label>
           <input
             type="text"
             value={address.country}
@@ -157,13 +162,21 @@ export const CheckoutForm: React.FC<{}> = () => {
           />
         </div>
         <div className="form-item">
-          <label>Phone Number</label>
           <input
             type="tel"
             value={phone}
             onChange={e => setPhone(e.target.value)}
             required
             className={classes.newform}
+            placeholder="Phone Number"
+          />
+        </div>
+        <div className="form-item">
+          <input
+            type="tel"
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
+            className={classes.hidden}
             placeholder="Phone Number"
           />
         </div>

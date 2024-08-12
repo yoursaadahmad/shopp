@@ -19,7 +19,7 @@
   padding: 40px;
   border-radius: 8px;
   background-color: var(--color-white);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   font-family: var(--font-jost);
 
   @include mid-break {
@@ -51,15 +51,15 @@
   input, select, textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid var(--color-gray-300);
-    border-radius: 4px;
-    font-size: 14px;
+    border: var(--color-gray-300);
+    border-radius: 8px;
+    font-size: 16px;
     font-family: var(--font-jost);
 
     // Opacity for placeholder only
     &::placeholder {
       color: var(--color-gray-500);
-      opacity: 0.5;
+      opacity: 0.7;
     }
 
     &:focus::placeholder {
@@ -86,6 +86,12 @@
 .form-item {
   margin-bottom: 20px;
 }
+.formEmail {
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
 
 .newspan {
   font-size: large;
@@ -99,4 +105,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: inherit;
+}
+.hidden {
+  display: none;
 }

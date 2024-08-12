@@ -435,6 +435,7 @@ export interface Order {
     | null;
   phone: string;
   address: {
+    email: string;
     firstname: string;
     lastname: string;
     line1: string;

@@ -64,7 +64,6 @@ const flattenCart = (cart: User['cart']): User['cart'] => ({
 // Step 5: If the user is logged out, sync the cart to local storage only
 
 export const CartProvider = props => {
-  // const { setTimedNotification } = useNotifications();
   const { children } = props
   const { user, status: authStatus } = useAuth()
 
@@ -85,7 +84,7 @@ export const CartProvider = props => {
   // If there is a cart, fetch the products and hydrate the cart
   useEffect(() => {
     // wait for the user to be defined before initializing the cart
-    if (user === undefined) return
+    if (user === undefined && authStatus !== 'loggedOut') return
     if (!hasInitialized.current) {
       hasInitialized.current = true
 
@@ -126,7 +125,7 @@ export const CartProvider = props => {
 
       syncCartFromLocalStorage()
     }
-  }, [user])
+  }, [user, authStatus])
 
   // authenticate the user and if logged in, merge the user's cart with local state
   // only do this after we have initialized the cart to ensure we don't lose any items
@@ -153,7 +152,7 @@ export const CartProvider = props => {
   // upon logging in, merge and sync the existing local cart to Payload
   useEffect(() => {
     // wait until we have attempted authentication (the user is either an object or `null`)
-    if (!hasInitialized.current || user === undefined || !cart.items) return
+    if (!hasInitialized.current || !cart.items) return
 
     const flattenedCart = flattenCart(cart)
 

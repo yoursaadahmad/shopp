@@ -5109,6 +5109,7 @@ type Order_Items {
 }
 
 type Order_Address {
+  email: String
   firstname: String
   lastname: String
   line1: String
@@ -5141,6 +5142,7 @@ input Order_where {
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
+  address__email: Order_address__email_operator
   address__firstname: Order_address__firstname_operator
   address__lastname: Order_address__lastname_operator
   address__line1: Order_address__line1_operator
@@ -5224,6 +5226,16 @@ input Order_items__id_operator {
 }
 
 input Order_phone_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__email_operator {
   equals: String
   not_equals: String
   like: String
@@ -5346,6 +5358,7 @@ input Order_where_and {
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
+  address__email: Order_address__email_operator
   address__firstname: Order_address__firstname_operator
   address__lastname: Order_address__lastname_operator
   address__line1: Order_address__line1_operator
@@ -5369,6 +5382,7 @@ input Order_where_or {
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
+  address__email: Order_address__email_operator
   address__firstname: Order_address__firstname_operator
   address__lastname: Order_address__lastname_operator
   address__line1: Order_address__line1_operator
@@ -5646,6 +5660,7 @@ type OrdersDocAccessFields_address_Delete {
 }
 
 type OrdersDocAccessFields_address_Fields {
+  email: OrdersDocAccessFields_address_email
   firstname: OrdersDocAccessFields_address_firstname
   lastname: OrdersDocAccessFields_address_lastname
   line1: OrdersDocAccessFields_address_line1
@@ -5653,6 +5668,29 @@ type OrdersDocAccessFields_address_Fields {
   city: OrdersDocAccessFields_address_city
   postalCode: OrdersDocAccessFields_address_postalCode
   country: OrdersDocAccessFields_address_country
+}
+
+type OrdersDocAccessFields_address_email {
+  create: OrdersDocAccessFields_address_email_Create
+  read: OrdersDocAccessFields_address_email_Read
+  update: OrdersDocAccessFields_address_email_Update
+  delete: OrdersDocAccessFields_address_email_Delete
+}
+
+type OrdersDocAccessFields_address_email_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_email_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_email_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_email_Delete {
+  permission: Boolean!
 }
 
 type OrdersDocAccessFields_address_firstname {
@@ -10628,6 +10666,7 @@ type OrdersFields_address_Delete {
 }
 
 type OrdersFields_address_Fields {
+  email: OrdersFields_address_email
   firstname: OrdersFields_address_firstname
   lastname: OrdersFields_address_lastname
   line1: OrdersFields_address_line1
@@ -10635,6 +10674,29 @@ type OrdersFields_address_Fields {
   city: OrdersFields_address_city
   postalCode: OrdersFields_address_postalCode
   country: OrdersFields_address_country
+}
+
+type OrdersFields_address_email {
+  create: OrdersFields_address_email_Create
+  read: OrdersFields_address_email_Read
+  update: OrdersFields_address_email_Update
+  delete: OrdersFields_address_email_Delete
+}
+
+type OrdersFields_address_email_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_email_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_email_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_email_Delete {
+  permission: Boolean!
 }
 
 type OrdersFields_address_firstname {
@@ -13142,6 +13204,7 @@ input mutationOrder_ItemsInput {
 }
 
 input mutationOrder_AddressInput {
+  email: String!
   firstname: String!
   lastname: String!
   line1: String!
@@ -13170,6 +13233,7 @@ input mutationOrderUpdate_ItemsInput {
 }
 
 input mutationOrderUpdate_AddressInput {
+  email: String!
   firstname: String!
   lastname: String!
   line1: String!

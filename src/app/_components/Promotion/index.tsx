@@ -41,7 +41,7 @@ const Promotion = () => {
   return (
     <section className={classes.promotion}>
       <div className={classes.textbox}>
-        <h3 className={classes.title}>Deals of the Month</h3>
+        <h3 className={classes.title}>About Us</h3>
         <p>
           Welcome to Shoppio, your ultimate shopping destination for top-quality products at
           unbeatable prices! Our store is stocked with a wide variety of items carefully selected to
@@ -51,12 +51,6 @@ const Promotion = () => {
           enjoyable. Explore our collections today and discover why Shoppio is the preferred choice
           for savvy shoppers like you!
         </p>
-        <ul className={classes.stats}>
-          <StatBox label="Days" value={time.days} />
-          <StatBox label="Hours" value={time.hours} />
-          <StatBox label="Minutes" value={time.minutes} />
-          <StatBox label="Seconds" value={time.seconds} />
-        </ul>
       </div>
     </section>
   )

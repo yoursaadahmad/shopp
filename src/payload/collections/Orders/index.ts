@@ -85,6 +85,12 @@ export const Orders: CollectionConfig = {
       type: 'group',
       fields: [
         {
+          name: 'email',
+          type: 'text',
+          label: 'Email',
+          required: true,
+        },
+        {
           name: 'firstname',
           type: 'text',
           label: 'First Name',
