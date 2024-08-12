@@ -1,10 +1,8 @@
 'use client'
 
-import React, { useCallback } from 'react'
-import { AddressElement, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import React, { useCallback, useState } from 'react'
 import { useRouter } from 'next/navigation'
 
-import { Order } from '../../../../payload/payload-types'
 import { Button } from '../../../_components/Button'
 import { Message } from '../../../_components/Message'
 import { priceFromJSON } from '../../../_components/Price'
@@ -13,10 +11,18 @@ import { useCart } from '../../../_providers/Cart'
 import classes from './index.module.scss'
 
 export const CheckoutForm: React.FC<{}> = () => {
-  const stripe = useStripe()
-  const elements = useElements()
-  const [error, setError] = React.useState<string | null>(null)
-  const [isLoading, setIsLoading] = React.useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [address, setAddress] = useState({
+    firstname: '',
+    lastname: '',
+    line1: '',
+    line2: '',
+    city: '',
+    postalCode: '',
+    country: '',
+  })
+  const [phone, setPhone] = useState('')
   const router = useRouter()
   const { cart, cartTotal } = useCart()
 
@@ -26,92 +32,140 @@ export const CheckoutForm: React.FC<{}> = () => {
       setIsLoading(true)
 
       try {
-        const { error: stripeError, paymentIntent } = await stripe?.confirmPayment({
-          elements: elements!,
-          redirect: 'if_required',
-          confirmParams: {
-            return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/order-confirmation`,
+        // Validate that required fields are filled out
+        if (!address.line1 || !address.city || !address.postalCode || !address.country || !phone) {
+          throw new Error('Please fill out all required fields.')
+        }
+
+        const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
+          method: 'POST',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
           },
+          body: JSON.stringify({
+            total: cartTotal.raw,
+            items: (cart?.items || [])?.map(({ product, quantity }) => ({
+              product: typeof product === 'string' ? product : product.id,
+              quantity,
+              price:
+                typeof product === 'object' ? priceFromJSON(product.priceJSON, 1, true) : undefined,
+            })),
+            address, // Send the custom address object
+            phone, // Send the phone number
+          }),
         })
 
-        if (stripeError) {
-          setError(stripeError.message)
-          setIsLoading(false)
-        }
+        if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
 
-        if (paymentIntent) {
-          // Before redirecting to the order confirmation page, we need to create the order in Payload
-          // Cannot clear the cart yet because if you clear the cart while in the checkout
-          // you will be redirected to the `/cart` page before this redirect happens
-          // Instead, we clear the cart in an `afterChange` hook on the `orders` collection in Payload
-          try {
-            const orderReq = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/orders`, {
-              method: 'POST',
-              credentials: 'include',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                total: cartTotal.raw,
-                stripePaymentIntentID: paymentIntent.id,
-                items: (cart?.items || [])?.map(({ product, quantity }) => ({
-                  product: typeof product === 'string' ? product : product.id,
-                  quantity,
-                  price:
-                    typeof product === 'object'
-                      ? priceFromJSON(product.priceJSON, 1, true)
-                      : undefined,
-                })),
-              }),
-            })
+        const { error: errorFromRes, doc } = await orderReq.json()
 
-            if (!orderReq.ok) throw new Error(orderReq.statusText || 'Something went wrong.')
+        if (errorFromRes) throw new Error(errorFromRes)
 
-            const {
-              error: errorFromRes,
-              doc,
-            }: {
-              message?: string
-              error?: string
-              doc: Order
-            } = await orderReq.json()
-
-            if (errorFromRes) throw new Error(errorFromRes)
-
-            router.push(`/order-confirmation?order_id=${doc.id}`)
-          } catch (err) {
-            // don't throw an error if the order was not created successfully
-            // this is because payment _did_ in fact go through, and we don't want the user to pay twice
-            console.error(err.message) // eslint-disable-line no-console
-            router.push(`/order-confirmation?error=${encodeURIComponent(err.message)}`)
-          }
-        }
+        router.push(`/order-confirmation?order_id=${doc.id}`)
       } catch (err) {
-        const msg = err instanceof Error ? err.message : 'Something went wrong.'
-        setError(`Error while submitting payment: ${msg}`)
+        setError(`Error while submitting order: ${err.message}`)
         setIsLoading(false)
       }
     },
-    [stripe, elements, router, cart, cartTotal],
+    [address, phone, cart, cartTotal, router],
   )
 
   return (
-    <form onSubmit={handleSubmit} className={classes.form}>
-      {error && <Message error={error} />}
-      <AddressElement options={{ mode: 'shipping' }} />
-      <div>
-        <PaymentElement />
-      </div>
-      <div className={classes.actions}>
-        <Button label="Back to cart" href="/cart" appearance="secondary" />
-        <Button
-          label={isLoading ? 'Loading...' : 'Checkout'}
-          type="submit"
-          appearance="primary"
-          disabled={!stripe || isLoading}
-        />
-      </div>
-    </form>
+    <div className={classes.newform}>
+      <span className={classes.newspan}>Fill Your Information. Pay with cash on delivery</span>
+      <form onSubmit={handleSubmit} className={classes.form}>
+        {error && <Message error={error} />}
+        <div>
+          <label>First Name</label>
+          <input
+            type="text"
+            value={address.firstname}
+            onChange={e => setAddress({ ...address, firstname: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input
+            type="text"
+            value={address.lastname}
+            onChange={e => setAddress({ ...address, lastname: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Address Line 1</label>
+          <input
+            type="text"
+            value={address.line1}
+            onChange={e => setAddress({ ...address, line1: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Address Line 2</label>
+          <input
+            type="text"
+            value={address.line2}
+            onChange={e => setAddress({ ...address, line2: e.target.value })}
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>City</label>
+          <input
+            type="text"
+            value={address.city}
+            onChange={e => setAddress({ ...address, city: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Postal Code</label>
+          <input
+            type="text"
+            value={address.postalCode}
+            onChange={e => setAddress({ ...address, postalCode: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Country</label>
+          <input
+            type="text"
+            value={address.country}
+            onChange={e => setAddress({ ...address, country: e.target.value })}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input
+            type="tel"
+            value={phone}
+            onChange={e => setPhone(e.target.value)}
+            required
+            className={classes.newform}
+          />
+        </div>
+        <div className={classes.actions}>
+          <Button label="Back to cart" href="/cart" appearance="secondary" />
+          <Button
+            label={isLoading ? 'Loading...' : 'Confirm Order'}
+            type="submit"
+            appearance="primary"
+            disabled={isLoading}
+          />
+        </div>
+      </form>
+    </div>
   )
 }
 

@@ -5055,6 +5055,8 @@ type Order {
   stripePaymentIntentID: String
   total: Float!
   items: [Order_Items!]
+  phone: String!
+  address: Order_Address
   updatedAt: DateTime
   createdAt: DateTime
 }
@@ -5106,6 +5108,16 @@ type Order_Items {
   id: String
 }
 
+type Order_Address {
+  firstname: String
+  lastname: String
+  line1: String
+  line2: String
+  city: String
+  postalCode: String
+  country: String
+}
+
 type Orders {
   docs: [Order]
   hasNextPage: Boolean
@@ -5128,6 +5140,14 @@ input Order_where {
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
+  phone: Order_phone_operator
+  address__firstname: Order_address__firstname_operator
+  address__lastname: Order_address__lastname_operator
+  address__line1: Order_address__line1_operator
+  address__line2: Order_address__line2_operator
+  address__city: Order_address__city_operator
+  address__postalCode: Order_address__postalCode_operator
+  address__country: Order_address__country_operator
   updatedAt: Order_updatedAt_operator
   createdAt: Order_createdAt_operator
   id: Order_id_operator
@@ -5203,6 +5223,87 @@ input Order_items__id_operator {
   exists: Boolean
 }
 
+input Order_phone_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__firstname_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__lastname_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__line1_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__line2_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Order_address__city_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__postalCode_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Order_address__country_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
 input Order_updatedAt_operator {
   equals: DateTime
   not_equals: DateTime
@@ -5244,6 +5345,14 @@ input Order_where_and {
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
+  phone: Order_phone_operator
+  address__firstname: Order_address__firstname_operator
+  address__lastname: Order_address__lastname_operator
+  address__line1: Order_address__line1_operator
+  address__line2: Order_address__line2_operator
+  address__city: Order_address__city_operator
+  address__postalCode: Order_address__postalCode_operator
+  address__country: Order_address__country_operator
   updatedAt: Order_updatedAt_operator
   createdAt: Order_createdAt_operator
   id: Order_id_operator
@@ -5259,6 +5368,14 @@ input Order_where_or {
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
   items__id: Order_items__id_operator
+  phone: Order_phone_operator
+  address__firstname: Order_address__firstname_operator
+  address__lastname: Order_address__lastname_operator
+  address__line1: Order_address__line1_operator
+  address__line2: Order_address__line2_operator
+  address__city: Order_address__city_operator
+  address__postalCode: Order_address__postalCode_operator
+  address__country: Order_address__country_operator
   updatedAt: Order_updatedAt_operator
   createdAt: Order_createdAt_operator
   id: Order_id_operator
@@ -5283,6 +5400,8 @@ type OrdersDocAccessFields {
   stripePaymentIntentID: OrdersDocAccessFields_stripePaymentIntentID
   total: OrdersDocAccessFields_total
   items: OrdersDocAccessFields_items
+  phone: OrdersDocAccessFields_phone
+  address: OrdersDocAccessFields_address
   updatedAt: OrdersDocAccessFields_updatedAt
   createdAt: OrdersDocAccessFields_createdAt
 }
@@ -5476,6 +5595,224 @@ type OrdersDocAccessFields_items_id_Update {
 }
 
 type OrdersDocAccessFields_items_id_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_phone {
+  create: OrdersDocAccessFields_phone_Create
+  read: OrdersDocAccessFields_phone_Read
+  update: OrdersDocAccessFields_phone_Update
+  delete: OrdersDocAccessFields_phone_Delete
+}
+
+type OrdersDocAccessFields_phone_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_phone_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_phone_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_phone_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address {
+  create: OrdersDocAccessFields_address_Create
+  read: OrdersDocAccessFields_address_Read
+  update: OrdersDocAccessFields_address_Update
+  delete: OrdersDocAccessFields_address_Delete
+  fields: OrdersDocAccessFields_address_Fields
+}
+
+type OrdersDocAccessFields_address_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_Fields {
+  firstname: OrdersDocAccessFields_address_firstname
+  lastname: OrdersDocAccessFields_address_lastname
+  line1: OrdersDocAccessFields_address_line1
+  line2: OrdersDocAccessFields_address_line2
+  city: OrdersDocAccessFields_address_city
+  postalCode: OrdersDocAccessFields_address_postalCode
+  country: OrdersDocAccessFields_address_country
+}
+
+type OrdersDocAccessFields_address_firstname {
+  create: OrdersDocAccessFields_address_firstname_Create
+  read: OrdersDocAccessFields_address_firstname_Read
+  update: OrdersDocAccessFields_address_firstname_Update
+  delete: OrdersDocAccessFields_address_firstname_Delete
+}
+
+type OrdersDocAccessFields_address_firstname_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_firstname_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_firstname_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_firstname_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_lastname {
+  create: OrdersDocAccessFields_address_lastname_Create
+  read: OrdersDocAccessFields_address_lastname_Read
+  update: OrdersDocAccessFields_address_lastname_Update
+  delete: OrdersDocAccessFields_address_lastname_Delete
+}
+
+type OrdersDocAccessFields_address_lastname_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_lastname_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_lastname_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_lastname_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line1 {
+  create: OrdersDocAccessFields_address_line1_Create
+  read: OrdersDocAccessFields_address_line1_Read
+  update: OrdersDocAccessFields_address_line1_Update
+  delete: OrdersDocAccessFields_address_line1_Delete
+}
+
+type OrdersDocAccessFields_address_line1_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line1_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line1_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line1_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line2 {
+  create: OrdersDocAccessFields_address_line2_Create
+  read: OrdersDocAccessFields_address_line2_Read
+  update: OrdersDocAccessFields_address_line2_Update
+  delete: OrdersDocAccessFields_address_line2_Delete
+}
+
+type OrdersDocAccessFields_address_line2_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line2_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line2_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_line2_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_city {
+  create: OrdersDocAccessFields_address_city_Create
+  read: OrdersDocAccessFields_address_city_Read
+  update: OrdersDocAccessFields_address_city_Update
+  delete: OrdersDocAccessFields_address_city_Delete
+}
+
+type OrdersDocAccessFields_address_city_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_city_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_city_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_city_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_postalCode {
+  create: OrdersDocAccessFields_address_postalCode_Create
+  read: OrdersDocAccessFields_address_postalCode_Read
+  update: OrdersDocAccessFields_address_postalCode_Update
+  delete: OrdersDocAccessFields_address_postalCode_Delete
+}
+
+type OrdersDocAccessFields_address_postalCode_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_postalCode_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_postalCode_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_postalCode_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_country {
+  create: OrdersDocAccessFields_address_country_Create
+  read: OrdersDocAccessFields_address_country_Read
+  update: OrdersDocAccessFields_address_country_Update
+  delete: OrdersDocAccessFields_address_country_Delete
+}
+
+type OrdersDocAccessFields_address_country_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_country_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_country_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_address_country_Delete {
   permission: Boolean!
 }
 
@@ -10045,6 +10382,8 @@ type OrdersFields {
   stripePaymentIntentID: OrdersFields_stripePaymentIntentID
   total: OrdersFields_total
   items: OrdersFields_items
+  phone: OrdersFields_phone
+  address: OrdersFields_address
   updatedAt: OrdersFields_updatedAt
   createdAt: OrdersFields_createdAt
 }
@@ -10238,6 +10577,224 @@ type OrdersFields_items_id_Update {
 }
 
 type OrdersFields_items_id_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_phone {
+  create: OrdersFields_phone_Create
+  read: OrdersFields_phone_Read
+  update: OrdersFields_phone_Update
+  delete: OrdersFields_phone_Delete
+}
+
+type OrdersFields_phone_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_phone_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_phone_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_phone_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address {
+  create: OrdersFields_address_Create
+  read: OrdersFields_address_Read
+  update: OrdersFields_address_Update
+  delete: OrdersFields_address_Delete
+  fields: OrdersFields_address_Fields
+}
+
+type OrdersFields_address_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_Fields {
+  firstname: OrdersFields_address_firstname
+  lastname: OrdersFields_address_lastname
+  line1: OrdersFields_address_line1
+  line2: OrdersFields_address_line2
+  city: OrdersFields_address_city
+  postalCode: OrdersFields_address_postalCode
+  country: OrdersFields_address_country
+}
+
+type OrdersFields_address_firstname {
+  create: OrdersFields_address_firstname_Create
+  read: OrdersFields_address_firstname_Read
+  update: OrdersFields_address_firstname_Update
+  delete: OrdersFields_address_firstname_Delete
+}
+
+type OrdersFields_address_firstname_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_firstname_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_firstname_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_firstname_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_lastname {
+  create: OrdersFields_address_lastname_Create
+  read: OrdersFields_address_lastname_Read
+  update: OrdersFields_address_lastname_Update
+  delete: OrdersFields_address_lastname_Delete
+}
+
+type OrdersFields_address_lastname_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_lastname_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_lastname_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_lastname_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line1 {
+  create: OrdersFields_address_line1_Create
+  read: OrdersFields_address_line1_Read
+  update: OrdersFields_address_line1_Update
+  delete: OrdersFields_address_line1_Delete
+}
+
+type OrdersFields_address_line1_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line1_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line1_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line1_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line2 {
+  create: OrdersFields_address_line2_Create
+  read: OrdersFields_address_line2_Read
+  update: OrdersFields_address_line2_Update
+  delete: OrdersFields_address_line2_Delete
+}
+
+type OrdersFields_address_line2_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line2_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line2_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_line2_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_city {
+  create: OrdersFields_address_city_Create
+  read: OrdersFields_address_city_Read
+  update: OrdersFields_address_city_Update
+  delete: OrdersFields_address_city_Delete
+}
+
+type OrdersFields_address_city_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_city_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_city_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_city_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_postalCode {
+  create: OrdersFields_address_postalCode_Create
+  read: OrdersFields_address_postalCode_Read
+  update: OrdersFields_address_postalCode_Update
+  delete: OrdersFields_address_postalCode_Delete
+}
+
+type OrdersFields_address_postalCode_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_postalCode_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_postalCode_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_postalCode_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_address_country {
+  create: OrdersFields_address_country_Create
+  read: OrdersFields_address_country_Read
+  update: OrdersFields_address_country_Update
+  delete: OrdersFields_address_country_Delete
+}
+
+type OrdersFields_address_country_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_address_country_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_address_country_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_address_country_Delete {
   permission: Boolean!
 }
 
@@ -12571,6 +13128,8 @@ input mutationOrderInput {
   stripePaymentIntentID: String
   total: Float!
   items: [mutationOrder_ItemsInput]
+  phone: String!
+  address: mutationOrder_AddressInput!
   updatedAt: String
   createdAt: String
 }
@@ -12582,11 +13141,23 @@ input mutationOrder_ItemsInput {
   id: String
 }
 
+input mutationOrder_AddressInput {
+  firstname: String!
+  lastname: String!
+  line1: String!
+  line2: String
+  city: String!
+  postalCode: String!
+  country: String!
+}
+
 input mutationOrderUpdateInput {
   orderedBy: String
   stripePaymentIntentID: String
   total: Float
   items: [mutationOrderUpdate_ItemsInput]
+  phone: String
+  address: mutationOrderUpdate_AddressInput!
   updatedAt: String
   createdAt: String
 }
@@ -12596,6 +13167,16 @@ input mutationOrderUpdate_ItemsInput {
   price: Float
   quantity: Float
   id: String
+}
+
+input mutationOrderUpdate_AddressInput {
+  firstname: String!
+  lastname: String!
+  line1: String!
+  line2: String
+  city: String!
+  postalCode: String!
+  country: String!
 }
 
 input mutationMediaInput {

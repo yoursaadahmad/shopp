@@ -433,6 +433,16 @@ export interface Order {
         id?: string | null;
       }[]
     | null;
+  phone: string;
+  address: {
+    firstname: string;
+    lastname: string;
+    line1: string;
+    line2?: string | null;
+    city: string;
+    postalCode: string;
+    country: string;
+  };
   updatedAt: string;
   createdAt: string;
 }

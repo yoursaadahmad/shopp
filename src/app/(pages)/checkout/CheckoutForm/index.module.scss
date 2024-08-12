@@ -15,3 +15,84 @@
 .hide {
   display: none;
 }
+
+.newform {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 40px;
+  border-radius: 8px;
+  background-color: var(--color-white);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  @include mid-break {
+    padding: 30px;
+    backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+
+  @include small-break {
+    padding: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+
+    @include small-break {
+      flex-direction: column;
+    }
+
+    .form-item {
+      flex: 1;
+      margin-right: 20px;
+
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--color-gray-300);
+    border-radius: 4px;
+    font-size: 16px;
+    
+    @include small-break {
+      font-size: 14px;
+      padding: 8px;
+    }
+  }
+
+  label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: var(--color-gray-700);
+    display: block;
+
+    @include small-break {
+      font-size: 14px;
+    }
+  }
+}
+
+.newspan {
+  font-size: large;
+  color: gray;
+  opacity: 100%;
+  margin-bottom: 20px;
+}

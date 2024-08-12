@@ -72,5 +72,57 @@ export const Orders: CollectionConfig = {
         },
       ],
     },
+    // Adding phone field
+    {
+      name: 'phone',
+      type: 'text',
+      label: 'Phone Number',
+      required: true,
+    },
+    // Adding address field
+    {
+      name: 'address',
+      type: 'group',
+      fields: [
+        {
+          name: 'firstname',
+          type: 'text',
+          label: 'First Name',
+          required: true,
+        },
+        {
+          name: 'lastname',
+          type: 'text',
+          label: 'Last Name',
+          required: true,
+        },
+        {
+          name: 'line1',
+          type: 'text',
+          label: 'Address Line 1',
+          required: true,
+        },
+        {
+          name: 'line2',
+          type: 'text',
+          label: 'Address Line 2',
+        },
+        {
+          name: 'city',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'postalCode',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'country',
+          type: 'text',
+          required: true,
+        },
+      ],
+    },
   ],
 }
