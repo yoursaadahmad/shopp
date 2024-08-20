@@ -28,6 +28,7 @@ const LoginForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    setValue, // Added to programmatically set form values
     formState: { errors, isLoading },
   } = useForm<FormData>()
 
@@ -44,6 +45,13 @@ const LoginForm: React.FC = () => {
     },
     [login, router],
   )
+
+  // Function to handle guest login
+  const loginAsGuest = () => {
+    setValue('email', 'guest@guest.com')
+    setValue('password', 'guest')
+    handleSubmit(onSubmit)() // Invoke the form submission
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
@@ -70,6 +78,13 @@ const LoginForm: React.FC = () => {
         label={isLoading ? 'Processing' : 'Login'}
         disabled={isLoading}
         className={classes.submit}
+      />
+      <Button
+        type="button"
+        appearance="secondary"
+        label="Continue as Guest"
+        onClick={loginAsGuest}
+        className={classes.submit} // Add this class for styling if needed
       />
       <div className={classes.links}>
         <Link href={`/create-account${allParams}`}>Create an account</Link>
