@@ -68,7 +68,7 @@ export const AddToCartButton: React.FC<{
       {/* Direct Checkout Button */}
       <Button
         type="button"
-        label="Login & Checkout"
+        label="Checkout"
         appearance="secondary" // Use a different appearance for distinction
         className={[classes.addToCartButton, !hasInitializedCart && classes.hidden]
           .filter(Boolean)
