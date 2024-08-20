@@ -42,7 +42,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   // Filter navigation items based on user status
   const filteredNavItems = profileNavItems.filter(item => {
     if (isGuest) {
-      return item.title !== 'My Purchases' && item.title !== 'My Orders'
+      return (
+        item.title !== 'Personal Information' &&
+        item.title !== 'My Purchases' &&
+        item.title !== 'My Orders'
+      )
     }
     return true
   })

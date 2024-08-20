@@ -37,11 +37,12 @@ const AccountForm: React.FC = () => {
 
   const router = useRouter()
 
+  const isGuest = user?.name === 'Guest'
+
   const onSubmit = useCallback(
     async (data: FormData) => {
-      if (user) {
+      if (user && !isGuest) {
         const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/users/${user.id}`, {
-          // Make sure to include cookies with fetch
           credentials: 'include',
           method: 'PATCH',
           body: JSON.stringify(data),
@@ -67,7 +68,7 @@ const AccountForm: React.FC = () => {
         }
       }
     },
-    [user, setUser, reset],
+    [user, setUser, reset, isGuest],
   )
 
   useEffect(() => {
@@ -79,7 +80,6 @@ const AccountForm: React.FC = () => {
       )
     }
 
-    // Once user is loaded, reset form to have default values
     if (user) {
       reset({
         email: user.email,
@@ -111,6 +111,7 @@ const AccountForm: React.FC = () => {
               type="button"
               className={classes.changePassword}
               onClick={() => setChangePassword(!changePassword)}
+              disabled={isGuest}
             >
               click here
             </button>
@@ -152,7 +153,7 @@ const AccountForm: React.FC = () => {
       <Button
         type="submit"
         label={isLoading ? 'Processing' : changePassword ? 'Change Password' : 'Update Account'}
-        disabled={isLoading}
+        disabled={isGuest} // Disable button if user is a guest
         appearance="primary"
         className={classes.submit}
       />
