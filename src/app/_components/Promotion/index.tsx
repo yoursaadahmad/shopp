@@ -42,6 +42,7 @@ const Promotion = () => {
     <section className={classes.promotion}>
       <div className={classes.textbox}>
         <h3 className={classes.title}>About Us</h3>
+        <p></p>
         <p>
           Welcome to Shoppio, your ultimate shopping destination for top-quality products at
           unbeatable prices! Our store is stocked with a wide variety of items carefully selected to
