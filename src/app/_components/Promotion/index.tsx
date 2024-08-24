@@ -43,13 +43,14 @@ const Promotion = () => {
       <div className={classes.textbox}>
         <h3 className={classes.title}>About Us</h3>
         <p></p>
+        <p></p>
         <p>
-          Welcome to Shoppio, your ultimate shopping destination for top-quality products at
+          Welcome to IMPERIAL, your ultimate shopping destination for top-quality products at
           unbeatable prices! Our store is stocked with a wide variety of items carefully selected to
           meet your needs and exceed your expectations. Whether you're looking for the latest
-          gadgets, stylish apparel, or everyday essentials, Shoppio has it all. With a commitment to
-          quality, fast shipping, and excellent customer service, we make shopping easy and
-          enjoyable. Explore our collections today and discover why Shoppio is the preferred choice
+          gadgets, stylish apparel, or everyday essentials, IMPERIAL has it all. With a commitment
+          to quality, fast shipping, and excellent customer service, we make shopping easy and
+          enjoyable. Explore our collections today and discover why IMPERIAL is the preferred choice
           for savvy shoppers like you!
         </p>
       </div>
