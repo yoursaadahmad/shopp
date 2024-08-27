@@ -1,6 +1,8 @@
 import { webpackBundler } from '@payloadcms/bundler-webpack'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { payloadCloud } from '@payloadcms/plugin-cloud'
+import { cloudStorage } from '@payloadcms/plugin-cloud-storage'
+import { s3Adapter } from '@payloadcms/plugin-cloud-storage/s3'
 import nestedDocs from '@payloadcms/plugin-nested-docs'
 import redirects from '@payloadcms/plugin-redirects'
 import seo from '@payloadcms/plugin-seo'
@@ -44,11 +46,7 @@ export default buildConfig({
     user: Users.slug,
     bundler: webpackBundler(),
     components: {
-      // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: [BeforeLogin],
-      // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
-      // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: [BeforeDashboard],
     },
     webpack: config => {
@@ -109,8 +107,6 @@ export default buildConfig({
       method: 'get',
       handler: productsProxy,
     },
-    // The seed endpoint is used to populate the database with some example data
-    // You should delete this endpoint before deploying your site to production
     {
       path: '/seed',
       method: 'get',
@@ -141,5 +137,24 @@ export default buildConfig({
       uploadsCollection: 'media',
     }),
     payloadCloud(),
+    cloudStorage({
+      collections: {
+        media: {
+          adapter: s3Adapter({
+            config: {
+              endpoint: process.env.S3_ENDPOINT || '',
+              region: process.env.S3_REGION || '',
+              credentials: {
+                accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+                secretAccessKey: process.env.S3_SECRET_ACCESS_KEY || '',
+              },
+              forcePathStyle: true,
+            },
+            bucket: process.env.S3_BUCKET || '',
+            acl: 'public-read',
+          }),
+        },
+      },
+    }),
   ],
 })
