@@ -10,22 +10,33 @@ import { RemoveFromCartButton } from '../../../_components/RemoveFromCartButton'
 
 import classes from './index.module.scss'
 
-const CartItems = ({ product, title, metaImage, qty, addItemToCart }) => {
+const CartItems = ({
+  product,
+  title,
+  metaImage,
+  qty,
+  selectedSize,
+  selectedColor,
+  addItemToCart,
+}) => {
   const [quantity, setQuantity] = useState(qty)
+
   const decrementQty = () => {
     const updatedQty = quantity > 1 ? quantity - 1 : 1
     setQuantity(updatedQty)
-    addItemToCart({ product, quantity: Number(updatedQty) })
+    addItemToCart({ product, quantity: updatedQty, selectedSize, selectedColor })
   }
+
   const incrementQty = () => {
     const updatedQty = quantity + 1
     setQuantity(updatedQty)
-    addItemToCart({ product, quantity: Number(updatedQty) })
+    addItemToCart({ product, quantity: updatedQty, selectedSize, selectedColor })
   }
+
   const enterQty = (e: React.ChangeEvent<HTMLInputElement>) => {
     const updatedQty = Number(e.target.value)
     setQuantity(updatedQty)
-    addItemToCart({ product, quantity: Number(updatedQty) })
+    addItemToCart({ product, quantity: updatedQty, selectedSize, selectedColor })
   }
 
   return (
@@ -40,6 +51,8 @@ const CartItems = ({ product, title, metaImage, qty, addItemToCart }) => {
         <div className={classes.titleWrapper}>
           <h6>{title}</h6>
           <Price product={product} button={false} />
+          {selectedSize && <p>Size: {selectedSize}</p>}
+          {selectedColor && <p>Color: {selectedColor}</p>}
         </div>
         <div className={classes.quantity}>
           <div className={classes.quantityBtn} onClick={decrementQty}>

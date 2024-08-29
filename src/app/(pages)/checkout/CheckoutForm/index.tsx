@@ -34,7 +34,6 @@ export const CheckoutForm: React.FC<{}> = () => {
       setIsLoading(true)
 
       try {
-        // Validate that required fields are filled out
         if (!address.line1 || !address.city || !address.postalCode || !address.country || !phone) {
           throw new Error('Please fill out all required fields.')
         }
@@ -47,14 +46,20 @@ export const CheckoutForm: React.FC<{}> = () => {
           },
           body: JSON.stringify({
             total: cartTotal.raw,
-            items: (cart?.items || [])?.map(({ product, quantity }) => ({
-              product: typeof product === 'string' ? product : product.id,
-              quantity,
-              price:
-                typeof product === 'object' ? priceFromJSON(product.priceJSON, 1, true) : undefined,
-            })),
-            address, // Send the custom address object
-            phone, // Send the phone number
+            items: (cart?.items || [])?.map(
+              ({ product, quantity, selectedSize, selectedColor }) => ({
+                product: typeof product === 'string' ? product : product.id,
+                quantity,
+                price:
+                  typeof product === 'object'
+                    ? priceFromJSON(product.priceJSON, 1, true)
+                    : undefined,
+                selectedSize,
+                selectedColor,
+              }),
+            ),
+            address,
+            phone,
           }),
         })
 

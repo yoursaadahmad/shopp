@@ -115,6 +115,38 @@ const Products: CollectionConfig = {
               },
               blocks: [CallToAction, Content, MediaBlock, Archive],
             },
+            {
+              name: 'sizeVariants',
+              label: 'Size Variants',
+              type: 'array',
+              labels: {
+                singular: 'Size Variant',
+                plural: 'Size Variants',
+              },
+              fields: [
+                {
+                  name: 'sizename',
+                  label: 'Size Name',
+                  type: 'text',
+                },
+              ],
+            },
+            {
+              name: 'colorVariants',
+              label: 'Color Variants',
+              type: 'array',
+              labels: {
+                singular: 'Color Variant',
+                plural: 'Color Variants',
+              },
+              fields: [
+                {
+                  name: 'colorname',
+                  label: 'Color Name',
+                  type: 'text',
+                },
+              ],
+            },
           ],
         },
       ],

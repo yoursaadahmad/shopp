@@ -70,16 +70,24 @@ export const Orders: CollectionConfig = {
           type: 'number',
           min: 0,
         },
+        {
+          name: 'selectedSize',
+          type: 'text',
+          label: 'Selected Size',
+        },
+        {
+          name: 'selectedColor',
+          type: 'text',
+          label: 'Selected Color',
+        },
       ],
     },
-    // Adding phone field
     {
       name: 'phone',
       type: 'text',
       label: 'Phone Number',
       required: true,
     },
-    // Adding address field
     {
       name: 'address',
       type: 'group',

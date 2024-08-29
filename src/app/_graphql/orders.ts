@@ -36,6 +36,8 @@ export const ORDER = `
           product ${PRODUCT}
           title
           priceJSON
+          selectedSize
+          selectedColor
         }
       }
     }

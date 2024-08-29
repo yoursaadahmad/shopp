@@ -57,3 +57,51 @@
 .description {
   padding: 30px 0;
 }
+
+.variantWrapper {
+  margin-bottom: 5px;
+  margin-top: 20px;
+}
+
+.variantLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-dark-900);
+}
+
+.variantSelect {
+  width: 70%;
+  max-width: 100px; /* Reduce width */
+  padding: 8px;
+  border: 300px solid var(--color-gray-300);
+  border-radius: 20px;
+  font-size: 14px;
+  color: var(--color-dark-900);
+  background-color: var(--color-light-50);
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-blue-500);
+  }
+}
+
+/* Add styles for the placeholder text in dropdown */
+.variantSelect option {
+  color: var(--color-dark-600);
+}
+
+/* Small screen adjustments */
+@media (max-width: 768px) {
+  .productHero {
+    grid-template-columns: 1fr;
+  }
+
+  .mediaWrapper {
+    min-height: 250px;
+  }
+
+  .variantWrapper {
+    flex-direction: column;
+  }
+}

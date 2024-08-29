@@ -14,6 +14,8 @@ export type CartItems =
   | {
       product?: (string | null) | Product;
       quantity?: number | null;
+      selectedSize?: string | null;
+      selectedColor?: string | null;
       id?: string | null;
     }[]
   | null;
@@ -403,6 +405,18 @@ export interface Product {
           }
       )[]
     | null;
+  sizeVariants?:
+    | {
+        sizename?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  colorVariants?:
+    | {
+        colorname?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   categories?: (string | Category)[] | null;
   relatedProducts?: (string | Product)[] | null;
   slug?: string | null;
@@ -430,6 +444,8 @@ export interface Order {
         product: string | Product;
         price?: number | null;
         quantity?: number | null;
+        selectedSize?: string | null;
+        selectedColor?: string | null;
         id?: string | null;
       }[]
     | null;

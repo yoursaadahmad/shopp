@@ -14,24 +14,36 @@ export const AddToCartButton: React.FC<{
   quantity?: number
   className?: string
   appearance?: Props['appearance']
-}> = props => {
-  const { product, quantity = 1, className, appearance = 'primary' } = props
-
-  const { cart, addItemToCart, isProductInCart, hasInitializedCart } = useCart()
-
+  selectedSize?: string
+  selectedColor?: string
+}> = ({
+  product,
+  quantity = 1,
+  className,
+  appearance = 'primary',
+  selectedSize,
+  selectedColor,
+}) => {
+  const { addItemToCart, isProductInCart, hasInitializedCart } = useCart()
   const [isInCart, setIsInCart] = useState<boolean>()
   const router = useRouter()
 
   useEffect(() => {
     setIsInCart(isProductInCart(product))
-  }, [isProductInCart, product, cart])
+  }, [isProductInCart, product])
 
-  // Function to handle direct checkout
+  const handleAddToCart = () => {
+    addItemToCart({ product, quantity, selectedSize, selectedColor })
+    router.push('/cart')
+  }
+
   const handleDirectCheckout = () => {
     if (!isInCart) {
       addItemToCart({
         product,
         quantity,
+        selectedSize,
+        selectedColor,
       })
     }
     router.push('/checkout')
@@ -52,25 +64,13 @@ export const AddToCartButton: React.FC<{
         ]
           .filter(Boolean)
           .join(' ')}
-        onClick={
-          !isInCart
-            ? () => {
-                addItemToCart({
-                  product,
-                  quantity,
-                })
-                router.push('/cart')
-              }
-            : undefined
-        }
+        onClick={handleAddToCart}
       />
-
-      {/* Direct Checkout Button */}
       <Button
         type="button"
-        label="Checkout"
+        label="Buy Now"
         appearance="secondary" // Use a different appearance for distinction
-        className={[classes.addToCartButton, !hasInitializedCart && classes.hidden]
+        className={[classes.directCheckoutButton, !hasInitializedCart && classes.hidden]
           .filter(Boolean)
           .join(' ')}
         onClick={handleDirectCheckout}

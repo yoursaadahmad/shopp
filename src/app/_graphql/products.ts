@@ -34,6 +34,12 @@ export const PRODUCT = `
           title
           ${META}
         }
+        sizeVariants {
+          sizename
+        }
+        colorVariants {
+          colorname
+        }
         ${META}
       }
     }

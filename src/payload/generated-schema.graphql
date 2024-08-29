@@ -1441,6 +1441,8 @@ type Product {
   priceJSON: String
   enablePaywall: Boolean
   paywall: [Product_Paywall!]
+  sizeVariants: [Product_SizeVariants!]
+  colorVariants: [Product_ColorVariants!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
   slug: String
@@ -1454,6 +1456,16 @@ type Product {
 union Product_Layout = Cta | Content | MediaBlock | Archive
 
 union Product_Paywall = Cta | Content | MediaBlock | Archive
+
+type Product_SizeVariants {
+  sizename: String
+  id: String
+}
+
+type Product_ColorVariants {
+  colorname: String
+  id: String
+}
 
 type Product_Meta {
   title: String
@@ -3853,6 +3865,10 @@ input Product_where {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizeVariants__sizename: Product_sizeVariants__sizename_operator
+  sizeVariants__id: Product_sizeVariants__id_operator
+  colorVariants__colorname: Product_colorVariants__colorname_operator
+  colorVariants__id: Product_colorVariants__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -3911,6 +3927,50 @@ input Product_priceJSON_operator {
 input Product_enablePaywall_operator {
   equals: Boolean
   not_equals: Boolean
+  exists: Boolean
+}
+
+input Product_sizeVariants__sizename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_sizeVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_colorVariants__colorname_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_colorVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -4027,6 +4087,10 @@ input Product_where_and {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizeVariants__sizename: Product_sizeVariants__sizename_operator
+  sizeVariants__id: Product_sizeVariants__id_operator
+  colorVariants__colorname: Product_colorVariants__colorname_operator
+  colorVariants__id: Product_colorVariants__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -4048,6 +4112,10 @@ input Product_where_or {
   stripeProductID: Product_stripeProductID_operator
   priceJSON: Product_priceJSON_operator
   enablePaywall: Product_enablePaywall_operator
+  sizeVariants__sizename: Product_sizeVariants__sizename_operator
+  sizeVariants__id: Product_sizeVariants__id_operator
+  colorVariants__colorname: Product_colorVariants__colorname_operator
+  colorVariants__id: Product_colorVariants__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -4084,6 +4152,8 @@ type ProductsDocAccessFields {
   priceJSON: ProductsDocAccessFields_priceJSON
   enablePaywall: ProductsDocAccessFields_enablePaywall
   paywall: ProductsDocAccessFields_paywall
+  sizeVariants: ProductsDocAccessFields_sizeVariants
+  colorVariants: ProductsDocAccessFields_colorVariants
   categories: ProductsDocAccessFields_categories
   relatedProducts: ProductsDocAccessFields_relatedProducts
   slug: ProductsDocAccessFields_slug
@@ -4252,6 +4322,156 @@ type ProductsDocAccessFields_paywall_Update {
 }
 
 type ProductsDocAccessFields_paywall_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants {
+  create: ProductsDocAccessFields_sizeVariants_Create
+  read: ProductsDocAccessFields_sizeVariants_Read
+  update: ProductsDocAccessFields_sizeVariants_Update
+  delete: ProductsDocAccessFields_sizeVariants_Delete
+  fields: ProductsDocAccessFields_sizeVariants_Fields
+}
+
+type ProductsDocAccessFields_sizeVariants_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_Fields {
+  sizename: ProductsDocAccessFields_sizeVariants_sizename
+  id: ProductsDocAccessFields_sizeVariants_id
+}
+
+type ProductsDocAccessFields_sizeVariants_sizename {
+  create: ProductsDocAccessFields_sizeVariants_sizename_Create
+  read: ProductsDocAccessFields_sizeVariants_sizename_Read
+  update: ProductsDocAccessFields_sizeVariants_sizename_Update
+  delete: ProductsDocAccessFields_sizeVariants_sizename_Delete
+}
+
+type ProductsDocAccessFields_sizeVariants_sizename_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_sizename_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_sizename_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_sizename_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_id {
+  create: ProductsDocAccessFields_sizeVariants_id_Create
+  read: ProductsDocAccessFields_sizeVariants_id_Read
+  update: ProductsDocAccessFields_sizeVariants_id_Update
+  delete: ProductsDocAccessFields_sizeVariants_id_Delete
+}
+
+type ProductsDocAccessFields_sizeVariants_id_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_id_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_id_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_sizeVariants_id_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants {
+  create: ProductsDocAccessFields_colorVariants_Create
+  read: ProductsDocAccessFields_colorVariants_Read
+  update: ProductsDocAccessFields_colorVariants_Update
+  delete: ProductsDocAccessFields_colorVariants_Delete
+  fields: ProductsDocAccessFields_colorVariants_Fields
+}
+
+type ProductsDocAccessFields_colorVariants_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_Fields {
+  colorname: ProductsDocAccessFields_colorVariants_colorname
+  id: ProductsDocAccessFields_colorVariants_id
+}
+
+type ProductsDocAccessFields_colorVariants_colorname {
+  create: ProductsDocAccessFields_colorVariants_colorname_Create
+  read: ProductsDocAccessFields_colorVariants_colorname_Read
+  update: ProductsDocAccessFields_colorVariants_colorname_Update
+  delete: ProductsDocAccessFields_colorVariants_colorname_Delete
+}
+
+type ProductsDocAccessFields_colorVariants_colorname_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_colorname_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_colorname_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_colorname_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_id {
+  create: ProductsDocAccessFields_colorVariants_id_Create
+  read: ProductsDocAccessFields_colorVariants_id_Read
+  update: ProductsDocAccessFields_colorVariants_id_Update
+  delete: ProductsDocAccessFields_colorVariants_id_Delete
+}
+
+type ProductsDocAccessFields_colorVariants_id_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_id_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_id_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_colorVariants_id_Delete {
   permission: Boolean!
 }
 
@@ -4557,6 +4777,8 @@ type ProductVersion_Version {
   priceJSON: String
   enablePaywall: Boolean
   paywall: [ProductVersion_Version_Paywall!]
+  sizeVariants: [ProductVersion_Version_SizeVariants!]
+  colorVariants: [ProductVersion_Version_ColorVariants!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
   slug: String
@@ -4570,6 +4792,16 @@ type ProductVersion_Version {
 union ProductVersion_Version_Layout = Cta | Content | MediaBlock | Archive
 
 union ProductVersion_Version_Paywall = Cta | Content | MediaBlock | Archive
+
+type ProductVersion_Version_SizeVariants {
+  sizename: String
+  id: String
+}
+
+type ProductVersion_Version_ColorVariants {
+  colorname: String
+  id: String
+}
 
 type ProductVersion_Version_Meta {
   title: String
@@ -4791,6 +5023,10 @@ input versionsProduct_where {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizeVariants__sizename: versionsProduct_version__sizeVariants__sizename_operator
+  version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
+  version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
+  version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -4861,6 +5097,50 @@ input versionsProduct_version__priceJSON_operator {
 input versionsProduct_version__enablePaywall_operator {
   equals: Boolean
   not_equals: Boolean
+  exists: Boolean
+}
+
+input versionsProduct_version__sizeVariants__sizename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__sizeVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__colorVariants__colorname_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__colorVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -5006,6 +5286,10 @@ input versionsProduct_where_and {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizeVariants__sizename: versionsProduct_version__sizeVariants__sizename_operator
+  version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
+  version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
+  version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5031,6 +5315,10 @@ input versionsProduct_where_or {
   version__stripeProductID: versionsProduct_version__stripeProductID_operator
   version__priceJSON: versionsProduct_version__priceJSON_operator
   version__enablePaywall: versionsProduct_version__enablePaywall_operator
+  version__sizeVariants__sizename: versionsProduct_version__sizeVariants__sizename_operator
+  version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
+  version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
+  version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5093,6 +5381,8 @@ type User_Cart {
 type CartItems {
   product(draft: Boolean): Product
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 
@@ -5105,6 +5395,8 @@ type Order_Items {
   product(draft: Boolean): Product
   price: Float
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 
@@ -5140,6 +5432,8 @@ input Order_where {
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
+  items__selectedSize: Order_items__selectedSize_operator
+  items__selectedColor: Order_items__selectedColor_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
   address__email: Order_address__email_operator
@@ -5211,6 +5505,28 @@ input Order_items__quantity_operator {
   greater_than: Float
   less_than_equal: Float
   less_than: Float
+  exists: Boolean
+}
+
+input Order_items__selectedSize_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Order_items__selectedColor_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
   exists: Boolean
 }
 
@@ -5356,6 +5672,8 @@ input Order_where_and {
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
+  items__selectedSize: Order_items__selectedSize_operator
+  items__selectedColor: Order_items__selectedColor_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
   address__email: Order_address__email_operator
@@ -5380,6 +5698,8 @@ input Order_where_or {
   items__product: Order_items__product_operator
   items__price: Order_items__price_operator
   items__quantity: Order_items__quantity_operator
+  items__selectedSize: Order_items__selectedSize_operator
+  items__selectedColor: Order_items__selectedColor_operator
   items__id: Order_items__id_operator
   phone: Order_phone_operator
   address__email: Order_address__email_operator
@@ -5517,6 +5837,8 @@ type OrdersDocAccessFields_items_Fields {
   product: OrdersDocAccessFields_items_product
   price: OrdersDocAccessFields_items_price
   quantity: OrdersDocAccessFields_items_quantity
+  selectedSize: OrdersDocAccessFields_items_selectedSize
+  selectedColor: OrdersDocAccessFields_items_selectedColor
   id: OrdersDocAccessFields_items_id
 }
 
@@ -5586,6 +5908,52 @@ type OrdersDocAccessFields_items_quantity_Update {
 }
 
 type OrdersDocAccessFields_items_quantity_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedSize {
+  create: OrdersDocAccessFields_items_selectedSize_Create
+  read: OrdersDocAccessFields_items_selectedSize_Read
+  update: OrdersDocAccessFields_items_selectedSize_Update
+  delete: OrdersDocAccessFields_items_selectedSize_Delete
+}
+
+type OrdersDocAccessFields_items_selectedSize_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedSize_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedSize_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedSize_Delete {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedColor {
+  create: OrdersDocAccessFields_items_selectedColor_Create
+  read: OrdersDocAccessFields_items_selectedColor_Read
+  update: OrdersDocAccessFields_items_selectedColor_Update
+  delete: OrdersDocAccessFields_items_selectedColor_Delete
+}
+
+type OrdersDocAccessFields_items_selectedColor_Create {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedColor_Read {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedColor_Update {
+  permission: Boolean!
+}
+
+type OrdersDocAccessFields_items_selectedColor_Delete {
   permission: Boolean!
 }
 
@@ -6904,6 +7272,8 @@ input User_where {
   stripeCustomerID: User_stripeCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
+  cart__items__selectedSize: User_cart__items__selectedSize_operator
+  cart__items__selectedColor: User_cart__items__selectedColor_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
   updatedAt: User_updatedAt_operator
@@ -6978,6 +7348,28 @@ input User_cart__items__quantity_operator {
   exists: Boolean
 }
 
+input User_cart__items__selectedSize_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input User_cart__items__selectedColor_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
 input User_cart__items__id_operator {
   equals: String
   not_equals: String
@@ -7045,6 +7437,8 @@ input User_where_and {
   stripeCustomerID: User_stripeCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
+  cart__items__selectedSize: User_cart__items__selectedSize_operator
+  cart__items__selectedColor: User_cart__items__selectedColor_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
   updatedAt: User_updatedAt_operator
@@ -7062,6 +7456,8 @@ input User_where_or {
   stripeCustomerID: User_stripeCustomerID_operator
   cart__items__product: User_cart__items__product_operator
   cart__items__quantity: User_cart__items__quantity_operator
+  cart__items__selectedSize: User_cart__items__selectedSize_operator
+  cart__items__selectedColor: User_cart__items__selectedColor_operator
   cart__items__id: User_cart__items__id_operator
   skipSync: User_skipSync_operator
   updatedAt: User_updatedAt_operator
@@ -7245,6 +7641,8 @@ type UsersDocAccessFields_cart_items_Delete {
 type UsersDocAccessFields_cart_items_Fields {
   product: UsersDocAccessFields_cart_items_product
   quantity: UsersDocAccessFields_cart_items_quantity
+  selectedSize: UsersDocAccessFields_cart_items_selectedSize
+  selectedColor: UsersDocAccessFields_cart_items_selectedColor
   id: UsersDocAccessFields_cart_items_id
 }
 
@@ -7291,6 +7689,52 @@ type UsersDocAccessFields_cart_items_quantity_Update {
 }
 
 type UsersDocAccessFields_cart_items_quantity_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedSize {
+  create: UsersDocAccessFields_cart_items_selectedSize_Create
+  read: UsersDocAccessFields_cart_items_selectedSize_Read
+  update: UsersDocAccessFields_cart_items_selectedSize_Update
+  delete: UsersDocAccessFields_cart_items_selectedSize_Delete
+}
+
+type UsersDocAccessFields_cart_items_selectedSize_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedSize_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedSize_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedSize_Delete {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedColor {
+  create: UsersDocAccessFields_cart_items_selectedColor_Create
+  read: UsersDocAccessFields_cart_items_selectedColor_Read
+  update: UsersDocAccessFields_cart_items_selectedColor_Update
+  delete: UsersDocAccessFields_cart_items_selectedColor_Delete
+}
+
+type UsersDocAccessFields_cart_items_selectedColor_Create {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedColor_Read {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedColor_Update {
+  permission: Boolean!
+}
+
+type UsersDocAccessFields_cart_items_selectedColor_Delete {
   permission: Boolean!
 }
 
@@ -9951,6 +10395,8 @@ type ProductsFields {
   priceJSON: ProductsFields_priceJSON
   enablePaywall: ProductsFields_enablePaywall
   paywall: ProductsFields_paywall
+  sizeVariants: ProductsFields_sizeVariants
+  colorVariants: ProductsFields_colorVariants
   categories: ProductsFields_categories
   relatedProducts: ProductsFields_relatedProducts
   slug: ProductsFields_slug
@@ -10119,6 +10565,156 @@ type ProductsFields_paywall_Update {
 }
 
 type ProductsFields_paywall_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants {
+  create: ProductsFields_sizeVariants_Create
+  read: ProductsFields_sizeVariants_Read
+  update: ProductsFields_sizeVariants_Update
+  delete: ProductsFields_sizeVariants_Delete
+  fields: ProductsFields_sizeVariants_Fields
+}
+
+type ProductsFields_sizeVariants_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_Fields {
+  sizename: ProductsFields_sizeVariants_sizename
+  id: ProductsFields_sizeVariants_id
+}
+
+type ProductsFields_sizeVariants_sizename {
+  create: ProductsFields_sizeVariants_sizename_Create
+  read: ProductsFields_sizeVariants_sizename_Read
+  update: ProductsFields_sizeVariants_sizename_Update
+  delete: ProductsFields_sizeVariants_sizename_Delete
+}
+
+type ProductsFields_sizeVariants_sizename_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_sizename_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_sizename_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_sizename_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_id {
+  create: ProductsFields_sizeVariants_id_Create
+  read: ProductsFields_sizeVariants_id_Read
+  update: ProductsFields_sizeVariants_id_Update
+  delete: ProductsFields_sizeVariants_id_Delete
+}
+
+type ProductsFields_sizeVariants_id_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_id_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_id_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_sizeVariants_id_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants {
+  create: ProductsFields_colorVariants_Create
+  read: ProductsFields_colorVariants_Read
+  update: ProductsFields_colorVariants_Update
+  delete: ProductsFields_colorVariants_Delete
+  fields: ProductsFields_colorVariants_Fields
+}
+
+type ProductsFields_colorVariants_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_Fields {
+  colorname: ProductsFields_colorVariants_colorname
+  id: ProductsFields_colorVariants_id
+}
+
+type ProductsFields_colorVariants_colorname {
+  create: ProductsFields_colorVariants_colorname_Create
+  read: ProductsFields_colorVariants_colorname_Read
+  update: ProductsFields_colorVariants_colorname_Update
+  delete: ProductsFields_colorVariants_colorname_Delete
+}
+
+type ProductsFields_colorVariants_colorname_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_colorname_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_colorname_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_colorname_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_id {
+  create: ProductsFields_colorVariants_id_Create
+  read: ProductsFields_colorVariants_id_Read
+  update: ProductsFields_colorVariants_id_Update
+  delete: ProductsFields_colorVariants_id_Delete
+}
+
+type ProductsFields_colorVariants_id_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_id_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_id_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_colorVariants_id_Delete {
   permission: Boolean!
 }
 
@@ -10523,6 +11119,8 @@ type OrdersFields_items_Fields {
   product: OrdersFields_items_product
   price: OrdersFields_items_price
   quantity: OrdersFields_items_quantity
+  selectedSize: OrdersFields_items_selectedSize
+  selectedColor: OrdersFields_items_selectedColor
   id: OrdersFields_items_id
 }
 
@@ -10592,6 +11190,52 @@ type OrdersFields_items_quantity_Update {
 }
 
 type OrdersFields_items_quantity_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedSize {
+  create: OrdersFields_items_selectedSize_Create
+  read: OrdersFields_items_selectedSize_Read
+  update: OrdersFields_items_selectedSize_Update
+  delete: OrdersFields_items_selectedSize_Delete
+}
+
+type OrdersFields_items_selectedSize_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedSize_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedSize_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedSize_Delete {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedColor {
+  create: OrdersFields_items_selectedColor_Create
+  read: OrdersFields_items_selectedColor_Read
+  update: OrdersFields_items_selectedColor_Update
+  delete: OrdersFields_items_selectedColor_Delete
+}
+
+type OrdersFields_items_selectedColor_Create {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedColor_Read {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedColor_Update {
+  permission: Boolean!
+}
+
+type OrdersFields_items_selectedColor_Delete {
   permission: Boolean!
 }
 
@@ -11689,6 +12333,8 @@ type UsersFields_cart_items_Delete {
 type UsersFields_cart_items_Fields {
   product: UsersFields_cart_items_product
   quantity: UsersFields_cart_items_quantity
+  selectedSize: UsersFields_cart_items_selectedSize
+  selectedColor: UsersFields_cart_items_selectedColor
   id: UsersFields_cart_items_id
 }
 
@@ -11735,6 +12381,52 @@ type UsersFields_cart_items_quantity_Update {
 }
 
 type UsersFields_cart_items_quantity_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedSize {
+  create: UsersFields_cart_items_selectedSize_Create
+  read: UsersFields_cart_items_selectedSize_Read
+  update: UsersFields_cart_items_selectedSize_Update
+  delete: UsersFields_cart_items_selectedSize_Delete
+}
+
+type UsersFields_cart_items_selectedSize_Create {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedSize_Read {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedSize_Update {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedSize_Delete {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedColor {
+  create: UsersFields_cart_items_selectedColor_Create
+  read: UsersFields_cart_items_selectedColor_Read
+  update: UsersFields_cart_items_selectedColor_Update
+  delete: UsersFields_cart_items_selectedColor_Delete
+}
+
+type UsersFields_cart_items_selectedColor_Create {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedColor_Read {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedColor_Update {
+  permission: Boolean!
+}
+
+type UsersFields_cart_items_selectedColor_Delete {
   permission: Boolean!
 }
 
@@ -13135,6 +13827,8 @@ input mutationProductInput {
   priceJSON: String
   enablePaywall: Boolean
   paywall: JSON
+  sizeVariants: [mutationProduct_SizeVariantsInput]
+  colorVariants: [mutationProduct_ColorVariantsInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13143,6 +13837,16 @@ input mutationProductInput {
   updatedAt: String
   createdAt: String
   _status: Product__status_MutationInput
+}
+
+input mutationProduct_SizeVariantsInput {
+  sizename: String
+  id: String
+}
+
+input mutationProduct_ColorVariantsInput {
+  colorname: String
+  id: String
 }
 
 input mutationProduct_MetaInput {
@@ -13164,6 +13868,8 @@ input mutationProductUpdateInput {
   priceJSON: String
   enablePaywall: Boolean
   paywall: JSON
+  sizeVariants: [mutationProductUpdate_SizeVariantsInput]
+  colorVariants: [mutationProductUpdate_ColorVariantsInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13172,6 +13878,16 @@ input mutationProductUpdateInput {
   updatedAt: String
   createdAt: String
   _status: ProductUpdate__status_MutationInput
+}
+
+input mutationProductUpdate_SizeVariantsInput {
+  sizename: String
+  id: String
+}
+
+input mutationProductUpdate_ColorVariantsInput {
+  colorname: String
+  id: String
 }
 
 input mutationProductUpdate_MetaInput {
@@ -13200,6 +13916,8 @@ input mutationOrder_ItemsInput {
   product: String
   price: Float
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 
@@ -13229,6 +13947,8 @@ input mutationOrderUpdate_ItemsInput {
   product: String
   price: Float
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 
@@ -13336,6 +14056,8 @@ input mutationUser_CartInput {
 input mutationUser_Cart_ItemsInput {
   product: String
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 
@@ -13370,6 +14092,8 @@ input mutationUserUpdate_CartInput {
 input mutationUserUpdate_Cart_ItemsInput {
   product: String
   quantity: Float
+  selectedSize: String
+  selectedColor: String
   id: String
 }
 

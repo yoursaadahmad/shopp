@@ -109,6 +109,8 @@ export const CheckoutPage: React.FC<{
                   quantity,
                   product,
                   product: { title, meta },
+                  selectedSize,
+                  selectedColor,
                 } = item
 
                 if (!quantity) return null
@@ -122,6 +124,8 @@ export const CheckoutPage: React.FC<{
                       title={title}
                       metaImage={metaImage}
                       quantity={quantity}
+                      selectedSize={selectedSize}
+                      selectedColor={selectedColor}
                       index={index}
                     />
                   </Fragment>
