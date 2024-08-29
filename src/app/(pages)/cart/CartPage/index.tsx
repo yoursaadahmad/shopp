@@ -88,6 +88,8 @@ export const CartPage: React.FC<{
                           metaImage={metaImage}
                           qty={quantity}
                           addItemToCart={addItemToCart}
+                          selectedColor={item.selectedColor}
+                          selectedSize={item.selectedSize}
                         />
                       )
                     }
