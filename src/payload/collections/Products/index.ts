@@ -147,6 +147,23 @@ const Products: CollectionConfig = {
                 },
               ],
             },
+            {
+              name: 'gallery',
+              label: 'Gallery',
+              type: 'array',
+              fields: [
+                {
+                  name: 'media',
+                  type: 'upload',
+                  relationTo: 'media',
+                },
+                {
+                  name: 'caption',
+                  label: 'Caption',
+                  type: 'text',
+                },
+              ],
+            },
           ],
         },
       ],

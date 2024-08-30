@@ -15,17 +15,85 @@
   position: relative;
   min-height: 400px;
   background-color: var(--color-dark-50);
+  overflow: hidden; /* Ensure that any overflow content is hidden */
 
   @include small-break {
     min-height: 250px;
   }
 }
 
-.image {
-  padding: 24px;
-  object-fit: contain;
-  aspect-ratio: 1/1;
+.selectedImageWrapper {
+  position: absolute;
+  object-fit: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Prevents click events on the selected image */
+  z-index: 1; /* Ensures it is above other content */
+  overflow: hidden; /* Ensure that any overflow content is hidden */
+}
+
+.selectedImage {
   max-width: 100%;
+  max-height: 100%;
+  object-fit: inherit; /* Ensure the image fits within the container without distortion */
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+  gap: 10px; /* Adjust gap for better spacing */
+  justify-content: flex-start; /* Align items to the start */
+}
+
+.returnButton {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: var(--color-blue-500);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  z-index: 10;
+
+}
+
+.returnButton:hover {
+  background-color: var(--color-blue-700);
+}
+
+.galleryItem {
+  cursor: pointer;
+  width: 100px; /* Fixed size of gallery items */
+  height: 100px;
+  overflow: hidden; /* Ensure that any overflow content is hidden */
+  border: 2px solid transparent;
+  transition: border-color 0.3s, transform 0.3s;
+  border-radius: 8px; /* Rounded corners for gallery items */
+}
+
+.selectedGalleryItem {
+  border-color: #000; /* Highlight border for selected image */
+}
+
+.galleryItem:hover {
+  border-color: #000; /* Highlight border on hover */
+  transform: scale(1.05); /* Slight zoom effect */
+}
+
+.galleryThumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Ensure image covers the thumbnail area */
+  transition: opacity 0.3s;
 }
 
 .details {
@@ -106,7 +174,6 @@
   border-radius: 18px; /* Make the pill more rounded */
   cursor: pointer;
 
-
   &:hover {
     background-color: calc(var(--theme-elevation-100) * 0.8);
   }
@@ -117,7 +184,6 @@
 }
 
 .activePill {
-  
   border: black solid 2px;
 }
 
@@ -143,7 +209,6 @@
   }
 }
 
-/* Small screen adjustments */
 @media (max-width: 768px) {
   .productHero {
     grid-template-columns: 1fr;
@@ -157,4 +222,3 @@
     flex-direction: column;
   }
 }
-

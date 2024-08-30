@@ -1443,6 +1443,7 @@ type Product {
   paywall: [Product_Paywall!]
   sizeVariants: [Product_SizeVariants!]
   colorVariants: [Product_ColorVariants!]
+  gallery: [Product_Gallery!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
   slug: String
@@ -1465,6 +1466,200 @@ type Product_SizeVariants {
 type Product_ColorVariants {
   colorname: String
   id: String
+}
+
+type Product_Gallery {
+  media(where: Product_Gallery_Media_where): Media
+  caption: String
+  id: String
+}
+
+input Product_Gallery_Media_where {
+  alt: Product_Gallery_Media_alt_operator
+  caption: Product_Gallery_Media_caption_operator
+  updatedAt: Product_Gallery_Media_updatedAt_operator
+  createdAt: Product_Gallery_Media_createdAt_operator
+  url: Product_Gallery_Media_url_operator
+  filename: Product_Gallery_Media_filename_operator
+  mimeType: Product_Gallery_Media_mimeType_operator
+  filesize: Product_Gallery_Media_filesize_operator
+  width: Product_Gallery_Media_width_operator
+  height: Product_Gallery_Media_height_operator
+  focalX: Product_Gallery_Media_focalX_operator
+  focalY: Product_Gallery_Media_focalY_operator
+  id: Product_Gallery_Media_id_operator
+  AND: [Product_Gallery_Media_where_and]
+  OR: [Product_Gallery_Media_where_or]
+}
+
+input Product_Gallery_Media_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input Product_Gallery_Media_caption_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+  exists: Boolean
+}
+
+input Product_Gallery_Media_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Product_Gallery_Media_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input Product_Gallery_Media_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_Gallery_Media_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_Gallery_Media_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_Gallery_Media_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Product_Gallery_Media_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Product_Gallery_Media_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Product_Gallery_Media_focalX_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Product_Gallery_Media_focalY_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input Product_Gallery_Media_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_Gallery_Media_where_and {
+  alt: Product_Gallery_Media_alt_operator
+  caption: Product_Gallery_Media_caption_operator
+  updatedAt: Product_Gallery_Media_updatedAt_operator
+  createdAt: Product_Gallery_Media_createdAt_operator
+  url: Product_Gallery_Media_url_operator
+  filename: Product_Gallery_Media_filename_operator
+  mimeType: Product_Gallery_Media_mimeType_operator
+  filesize: Product_Gallery_Media_filesize_operator
+  width: Product_Gallery_Media_width_operator
+  height: Product_Gallery_Media_height_operator
+  focalX: Product_Gallery_Media_focalX_operator
+  focalY: Product_Gallery_Media_focalY_operator
+  id: Product_Gallery_Media_id_operator
+  AND: [Product_Gallery_Media_where_and]
+  OR: [Product_Gallery_Media_where_or]
+}
+
+input Product_Gallery_Media_where_or {
+  alt: Product_Gallery_Media_alt_operator
+  caption: Product_Gallery_Media_caption_operator
+  updatedAt: Product_Gallery_Media_updatedAt_operator
+  createdAt: Product_Gallery_Media_createdAt_operator
+  url: Product_Gallery_Media_url_operator
+  filename: Product_Gallery_Media_filename_operator
+  mimeType: Product_Gallery_Media_mimeType_operator
+  filesize: Product_Gallery_Media_filesize_operator
+  width: Product_Gallery_Media_width_operator
+  height: Product_Gallery_Media_height_operator
+  focalX: Product_Gallery_Media_focalX_operator
+  focalY: Product_Gallery_Media_focalY_operator
+  id: Product_Gallery_Media_id_operator
+  AND: [Product_Gallery_Media_where_and]
+  OR: [Product_Gallery_Media_where_or]
 }
 
 type Product_Meta {
@@ -3869,6 +4064,9 @@ input Product_where {
   sizeVariants__id: Product_sizeVariants__id_operator
   colorVariants__colorname: Product_colorVariants__colorname_operator
   colorVariants__id: Product_colorVariants__id_operator
+  gallery__media: Product_gallery__media_operator
+  gallery__caption: Product_gallery__caption_operator
+  gallery__id: Product_gallery__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -3964,6 +4162,33 @@ input Product_colorVariants__colorname_operator {
 }
 
 input Product_colorVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_gallery__media_operator {
+  equals: String
+  not_equals: String
+}
+
+input Product_gallery__caption_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input Product_gallery__id_operator {
   equals: String
   not_equals: String
   like: String
@@ -4091,6 +4316,9 @@ input Product_where_and {
   sizeVariants__id: Product_sizeVariants__id_operator
   colorVariants__colorname: Product_colorVariants__colorname_operator
   colorVariants__id: Product_colorVariants__id_operator
+  gallery__media: Product_gallery__media_operator
+  gallery__caption: Product_gallery__caption_operator
+  gallery__id: Product_gallery__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -4116,6 +4344,9 @@ input Product_where_or {
   sizeVariants__id: Product_sizeVariants__id_operator
   colorVariants__colorname: Product_colorVariants__colorname_operator
   colorVariants__id: Product_colorVariants__id_operator
+  gallery__media: Product_gallery__media_operator
+  gallery__caption: Product_gallery__caption_operator
+  gallery__id: Product_gallery__id_operator
   categories: Product_categories_operator
   relatedProducts: Product_relatedProducts_operator
   slug: Product_slug_operator
@@ -4154,6 +4385,7 @@ type ProductsDocAccessFields {
   paywall: ProductsDocAccessFields_paywall
   sizeVariants: ProductsDocAccessFields_sizeVariants
   colorVariants: ProductsDocAccessFields_colorVariants
+  gallery: ProductsDocAccessFields_gallery
   categories: ProductsDocAccessFields_categories
   relatedProducts: ProductsDocAccessFields_relatedProducts
   slug: ProductsDocAccessFields_slug
@@ -4475,6 +4707,105 @@ type ProductsDocAccessFields_colorVariants_id_Delete {
   permission: Boolean!
 }
 
+type ProductsDocAccessFields_gallery {
+  create: ProductsDocAccessFields_gallery_Create
+  read: ProductsDocAccessFields_gallery_Read
+  update: ProductsDocAccessFields_gallery_Update
+  delete: ProductsDocAccessFields_gallery_Delete
+  fields: ProductsDocAccessFields_gallery_Fields
+}
+
+type ProductsDocAccessFields_gallery_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_Fields {
+  media: ProductsDocAccessFields_gallery_media
+  caption: ProductsDocAccessFields_gallery_caption
+  id: ProductsDocAccessFields_gallery_id
+}
+
+type ProductsDocAccessFields_gallery_media {
+  create: ProductsDocAccessFields_gallery_media_Create
+  read: ProductsDocAccessFields_gallery_media_Read
+  update: ProductsDocAccessFields_gallery_media_Update
+  delete: ProductsDocAccessFields_gallery_media_Delete
+}
+
+type ProductsDocAccessFields_gallery_media_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_media_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_media_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_media_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_caption {
+  create: ProductsDocAccessFields_gallery_caption_Create
+  read: ProductsDocAccessFields_gallery_caption_Read
+  update: ProductsDocAccessFields_gallery_caption_Update
+  delete: ProductsDocAccessFields_gallery_caption_Delete
+}
+
+type ProductsDocAccessFields_gallery_caption_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_caption_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_caption_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_caption_Delete {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_id {
+  create: ProductsDocAccessFields_gallery_id_Create
+  read: ProductsDocAccessFields_gallery_id_Read
+  update: ProductsDocAccessFields_gallery_id_Update
+  delete: ProductsDocAccessFields_gallery_id_Delete
+}
+
+type ProductsDocAccessFields_gallery_id_Create {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_id_Read {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_id_Update {
+  permission: Boolean!
+}
+
+type ProductsDocAccessFields_gallery_id_Delete {
+  permission: Boolean!
+}
+
 type ProductsDocAccessFields_categories {
   create: ProductsDocAccessFields_categories_Create
   read: ProductsDocAccessFields_categories_Read
@@ -4779,6 +5110,7 @@ type ProductVersion_Version {
   paywall: [ProductVersion_Version_Paywall!]
   sizeVariants: [ProductVersion_Version_SizeVariants!]
   colorVariants: [ProductVersion_Version_ColorVariants!]
+  gallery: [ProductVersion_Version_Gallery!]
   categories: [Category!]
   relatedProducts(draft: Boolean): [Product!]
   slug: String
@@ -4801,6 +5133,200 @@ type ProductVersion_Version_SizeVariants {
 type ProductVersion_Version_ColorVariants {
   colorname: String
   id: String
+}
+
+type ProductVersion_Version_Gallery {
+  media(where: ProductVersion_Version_Gallery_Media_where): Media
+  caption: String
+  id: String
+}
+
+input ProductVersion_Version_Gallery_Media_where {
+  alt: ProductVersion_Version_Gallery_Media_alt_operator
+  caption: ProductVersion_Version_Gallery_Media_caption_operator
+  updatedAt: ProductVersion_Version_Gallery_Media_updatedAt_operator
+  createdAt: ProductVersion_Version_Gallery_Media_createdAt_operator
+  url: ProductVersion_Version_Gallery_Media_url_operator
+  filename: ProductVersion_Version_Gallery_Media_filename_operator
+  mimeType: ProductVersion_Version_Gallery_Media_mimeType_operator
+  filesize: ProductVersion_Version_Gallery_Media_filesize_operator
+  width: ProductVersion_Version_Gallery_Media_width_operator
+  height: ProductVersion_Version_Gallery_Media_height_operator
+  focalX: ProductVersion_Version_Gallery_Media_focalX_operator
+  focalY: ProductVersion_Version_Gallery_Media_focalY_operator
+  id: ProductVersion_Version_Gallery_Media_id_operator
+  AND: [ProductVersion_Version_Gallery_Media_where_and]
+  OR: [ProductVersion_Version_Gallery_Media_where_or]
+}
+
+input ProductVersion_Version_Gallery_Media_alt_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+}
+
+input ProductVersion_Version_Gallery_Media_caption_operator {
+  equals: JSON
+  not_equals: JSON
+  like: JSON
+  contains: JSON
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_updatedAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_createdAt_operator {
+  equals: DateTime
+  not_equals: DateTime
+  greater_than_equal: DateTime
+  greater_than: DateTime
+  less_than_equal: DateTime
+  less_than: DateTime
+  like: DateTime
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_url_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_filename_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_mimeType_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_filesize_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_width_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_height_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_focalX_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_focalY_operator {
+  equals: Float
+  not_equals: Float
+  greater_than_equal: Float
+  greater_than: Float
+  less_than_equal: Float
+  less_than: Float
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input ProductVersion_Version_Gallery_Media_where_and {
+  alt: ProductVersion_Version_Gallery_Media_alt_operator
+  caption: ProductVersion_Version_Gallery_Media_caption_operator
+  updatedAt: ProductVersion_Version_Gallery_Media_updatedAt_operator
+  createdAt: ProductVersion_Version_Gallery_Media_createdAt_operator
+  url: ProductVersion_Version_Gallery_Media_url_operator
+  filename: ProductVersion_Version_Gallery_Media_filename_operator
+  mimeType: ProductVersion_Version_Gallery_Media_mimeType_operator
+  filesize: ProductVersion_Version_Gallery_Media_filesize_operator
+  width: ProductVersion_Version_Gallery_Media_width_operator
+  height: ProductVersion_Version_Gallery_Media_height_operator
+  focalX: ProductVersion_Version_Gallery_Media_focalX_operator
+  focalY: ProductVersion_Version_Gallery_Media_focalY_operator
+  id: ProductVersion_Version_Gallery_Media_id_operator
+  AND: [ProductVersion_Version_Gallery_Media_where_and]
+  OR: [ProductVersion_Version_Gallery_Media_where_or]
+}
+
+input ProductVersion_Version_Gallery_Media_where_or {
+  alt: ProductVersion_Version_Gallery_Media_alt_operator
+  caption: ProductVersion_Version_Gallery_Media_caption_operator
+  updatedAt: ProductVersion_Version_Gallery_Media_updatedAt_operator
+  createdAt: ProductVersion_Version_Gallery_Media_createdAt_operator
+  url: ProductVersion_Version_Gallery_Media_url_operator
+  filename: ProductVersion_Version_Gallery_Media_filename_operator
+  mimeType: ProductVersion_Version_Gallery_Media_mimeType_operator
+  filesize: ProductVersion_Version_Gallery_Media_filesize_operator
+  width: ProductVersion_Version_Gallery_Media_width_operator
+  height: ProductVersion_Version_Gallery_Media_height_operator
+  focalX: ProductVersion_Version_Gallery_Media_focalX_operator
+  focalY: ProductVersion_Version_Gallery_Media_focalY_operator
+  id: ProductVersion_Version_Gallery_Media_id_operator
+  AND: [ProductVersion_Version_Gallery_Media_where_and]
+  OR: [ProductVersion_Version_Gallery_Media_where_or]
 }
 
 type ProductVersion_Version_Meta {
@@ -5027,6 +5553,9 @@ input versionsProduct_where {
   version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
   version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
   version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
+  version__gallery__media: versionsProduct_version__gallery__media_operator
+  version__gallery__caption: versionsProduct_version__gallery__caption_operator
+  version__gallery__id: versionsProduct_version__gallery__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5134,6 +5663,33 @@ input versionsProduct_version__colorVariants__colorname_operator {
 }
 
 input versionsProduct_version__colorVariants__id_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__gallery__media_operator {
+  equals: String
+  not_equals: String
+}
+
+input versionsProduct_version__gallery__caption_operator {
+  equals: String
+  not_equals: String
+  like: String
+  contains: String
+  in: [String]
+  not_in: [String]
+  all: [String]
+  exists: Boolean
+}
+
+input versionsProduct_version__gallery__id_operator {
   equals: String
   not_equals: String
   like: String
@@ -5290,6 +5846,9 @@ input versionsProduct_where_and {
   version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
   version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
   version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
+  version__gallery__media: versionsProduct_version__gallery__media_operator
+  version__gallery__caption: versionsProduct_version__gallery__caption_operator
+  version__gallery__id: versionsProduct_version__gallery__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -5319,6 +5878,9 @@ input versionsProduct_where_or {
   version__sizeVariants__id: versionsProduct_version__sizeVariants__id_operator
   version__colorVariants__colorname: versionsProduct_version__colorVariants__colorname_operator
   version__colorVariants__id: versionsProduct_version__colorVariants__id_operator
+  version__gallery__media: versionsProduct_version__gallery__media_operator
+  version__gallery__caption: versionsProduct_version__gallery__caption_operator
+  version__gallery__id: versionsProduct_version__gallery__id_operator
   version__categories: versionsProduct_version__categories_operator
   version__relatedProducts: versionsProduct_version__relatedProducts_operator
   version__slug: versionsProduct_version__slug_operator
@@ -10397,6 +10959,7 @@ type ProductsFields {
   paywall: ProductsFields_paywall
   sizeVariants: ProductsFields_sizeVariants
   colorVariants: ProductsFields_colorVariants
+  gallery: ProductsFields_gallery
   categories: ProductsFields_categories
   relatedProducts: ProductsFields_relatedProducts
   slug: ProductsFields_slug
@@ -10715,6 +11278,105 @@ type ProductsFields_colorVariants_id_Update {
 }
 
 type ProductsFields_colorVariants_id_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery {
+  create: ProductsFields_gallery_Create
+  read: ProductsFields_gallery_Read
+  update: ProductsFields_gallery_Update
+  delete: ProductsFields_gallery_Delete
+  fields: ProductsFields_gallery_Fields
+}
+
+type ProductsFields_gallery_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_Fields {
+  media: ProductsFields_gallery_media
+  caption: ProductsFields_gallery_caption
+  id: ProductsFields_gallery_id
+}
+
+type ProductsFields_gallery_media {
+  create: ProductsFields_gallery_media_Create
+  read: ProductsFields_gallery_media_Read
+  update: ProductsFields_gallery_media_Update
+  delete: ProductsFields_gallery_media_Delete
+}
+
+type ProductsFields_gallery_media_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_media_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_media_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_media_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_caption {
+  create: ProductsFields_gallery_caption_Create
+  read: ProductsFields_gallery_caption_Read
+  update: ProductsFields_gallery_caption_Update
+  delete: ProductsFields_gallery_caption_Delete
+}
+
+type ProductsFields_gallery_caption_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_caption_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_caption_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_caption_Delete {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_id {
+  create: ProductsFields_gallery_id_Create
+  read: ProductsFields_gallery_id_Read
+  update: ProductsFields_gallery_id_Update
+  delete: ProductsFields_gallery_id_Delete
+}
+
+type ProductsFields_gallery_id_Create {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_id_Read {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_id_Update {
+  permission: Boolean!
+}
+
+type ProductsFields_gallery_id_Delete {
   permission: Boolean!
 }
 
@@ -13829,6 +14491,7 @@ input mutationProductInput {
   paywall: JSON
   sizeVariants: [mutationProduct_SizeVariantsInput]
   colorVariants: [mutationProduct_ColorVariantsInput]
+  gallery: [mutationProduct_GalleryInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13846,6 +14509,12 @@ input mutationProduct_SizeVariantsInput {
 
 input mutationProduct_ColorVariantsInput {
   colorname: String
+  id: String
+}
+
+input mutationProduct_GalleryInput {
+  media: String!
+  caption: String
   id: String
 }
 
@@ -13870,6 +14539,7 @@ input mutationProductUpdateInput {
   paywall: JSON
   sizeVariants: [mutationProductUpdate_SizeVariantsInput]
   colorVariants: [mutationProductUpdate_ColorVariantsInput]
+  gallery: [mutationProductUpdate_GalleryInput]
   categories: [String]
   relatedProducts: [String]
   slug: String
@@ -13887,6 +14557,12 @@ input mutationProductUpdate_SizeVariantsInput {
 
 input mutationProductUpdate_ColorVariantsInput {
   colorname: String
+  id: String
+}
+
+input mutationProductUpdate_GalleryInput {
+  media: String!
+  caption: String
   id: String
 }
 

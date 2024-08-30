@@ -50,6 +50,6 @@ export const beforeProductChange: BeforeChangeHook = async ({ req, data }) => {
   } catch (error: unknown) {
     payload.logger.error(`Error fetching prices from Stripe: ${error}`)
   }
-
+  payload.logger.info(`Gallery field after change: ${JSON.stringify(newDoc.gallery)}`)
   return newDoc
 }

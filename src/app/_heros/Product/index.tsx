@@ -16,6 +16,7 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     categories,
     sizeVariants,
     colorVariants,
+    gallery = [{}],
     meta: { image: metaImage, description } = {},
   } = product
 
@@ -23,15 +24,80 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
   const [selectedColor, setSelectedColor] = useState<string | undefined>(
     colorVariants?.[0]?.colorname,
   )
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+
+  // Function to extract filename from URL
+  const extractFilenameFromUrl = (url: string): string | null => {
+    try {
+      const urlObj = new URL(url)
+      const pathname = urlObj.pathname
+      const parts = pathname.split('/')
+      return parts[parts.length - 1] || null
+    } catch (error) {
+      console.error('Invalid URL:', url, error)
+      return null
+    }
+  }
+
+  // Generate media URLs for gallery items
+  const galleryUrls = gallery?.map(item => {
+    const mediaUrl = item?.media?.url // Adjust based on actual structure
+    if (typeof mediaUrl === 'string') {
+      const filename = extractFilenameFromUrl(mediaUrl)
+      return filename ? `${process.env.NEXT_PUBLIC_SERVER_URL}/media/${filename}` : ''
+    }
+    return ''
+  })
+
+  // Handle image selection
+  const handleImageSelect = (url: string) => {
+    setSelectedImage(url)
+  }
+
+  // Handle returning to the meta image
+  const handleReturnToMetaImage = () => {
+    setSelectedImage(null)
+  }
 
   return (
     <Gutter className={classes.productHero}>
       <div className={classes.mediaWrapper}>
-        {!metaImage && <div className={classes.placeholder}>No image</div>}
-        {metaImage && typeof metaImage !== 'string' && (
-          <Media imgClassName={classes.image} resource={metaImage} fill />
+        {/* Meta Image */}
+        {selectedImage === null && metaImage && typeof metaImage !== 'string' && (
+          <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
+        )}
+
+        {/* Selected Image */}
+        {selectedImage && (
+          <div className={classes.selectedImageWrapper}>
+            <img src={selectedImage} alt="Selected" className={classes.selectedImage} />
+            <button className={classes.returnButton} onClick={handleReturnToMetaImage}>
+              Return to Main Image
+            </button>
+          </div>
         )}
       </div>
+
+      {/* Gallery Media */}
+      {galleryUrls?.length > 0 && (
+        <div className={classes.gallery}>
+          {galleryUrls.map((url, index) => (
+            <div
+              key={index}
+              className={`${classes.galleryItem} ${
+                selectedImage === url ? classes.selectedGalleryItem : ''
+              }`}
+              onClick={() => handleImageSelect(url)}
+            >
+              <img
+                src={url}
+                alt={`Gallery item ${index + 1}`}
+                className={classes.galleryThumbnail}
+              />
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
@@ -51,7 +117,7 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
               )
             })}
           </div>
-          <p className={classes.stock}> In stock</p>
+          <p className={classes.stock}>In stock</p>
         </div>
 
         <Price product={product} button={false} />

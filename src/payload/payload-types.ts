@@ -417,6 +417,13 @@ export interface Product {
         id?: string | null;
       }[]
     | null;
+  gallery?:
+    | {
+        media: string,
+        caption?: string | null,
+        id?: string | null,
+    }[]
+    | null;
   categories?: (string | Category)[] | null;
   relatedProducts?: (string | Product)[] | null;
   slug?: string | null;

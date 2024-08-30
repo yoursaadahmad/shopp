@@ -2,6 +2,8 @@
 @use './colors.scss' as *;
 @use './type.scss' as *;
 @import "./theme.scss";
+@import "react-responsive-carousel/lib/styles/carousel.min.css";
+
 
 :root {
   --base: 24px;

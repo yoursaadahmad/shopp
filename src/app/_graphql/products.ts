@@ -40,6 +40,16 @@ export const PRODUCT = `
         colorVariants {
           colorname
         }
+        gallery {
+          media {
+            url
+            alt
+            id
+            createdAt
+            updatedAt
+          }
+          caption
+        }  
         ${META}
       }
     }
