@@ -58,44 +58,41 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
 
         {sizeVariants?.length > 0 && (
           <div className={classes.variantWrapper}>
-            <label htmlFor="sizeSelect" className={classes.variantLabel}>
-              Size
-            </label>
-            <select
-              id="sizeSelect"
-              className={classes.variantSelect}
-              value={selectedSize}
-              onChange={e => setSelectedSize(e.target.value)}
-            >
+            <label className={classes.variantLabel}>Size</label>
+            <div className={classes.pillGroup}>
               {sizeVariants.map((variant, index) => (
-                <option key={index} value={variant.sizename}>
+                <button
+                  key={index}
+                  className={`${classes.pill} ${
+                    selectedSize === variant.sizename ? classes.activePill : ''
+                  }`}
+                  onClick={() => setSelectedSize(variant.sizename)}
+                >
                   {variant.sizename}
-                </option>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
         )}
 
         {colorVariants?.length > 0 && (
           <div className={classes.variantWrapper}>
-            <label htmlFor="colorSelect" className={classes.variantLabel}>
-              Color
-            </label>
-            <select
-              id="colorSelect"
-              className={classes.variantSelect}
-              value={selectedColor}
-              onChange={e => setSelectedColor(e.target.value)}
-            >
+            <label className={classes.variantLabel}>Color</label>
+            <div className={classes.pillGroup}>
               {colorVariants.map((variant, index) => (
-                <option key={index} value={variant.colorname}>
+                <button
+                  key={index}
+                  className={`${classes.pill} ${
+                    selectedColor === variant.colorname ? classes.activePill : ''
+                  }`}
+                  onClick={() => setSelectedColor(variant.colorname)}
+                >
                   {variant.colorname}
-                </option>
+                </button>
               ))}
-            </select>
+            </div>
           </div>
         )}
-
         <div className={classes.description}>
           <h6>Description</h6>
           <p>{description}</p>
