@@ -40,6 +40,7 @@
     "dotenv": "^8.2.0",
     "escape-html": "^1.0.3",
     "express": "^4.19.2",
+    "keen-slider": "^6.8.6",
     "next": "13.5.2",
     "nodemailer": "^6.9.14",
     "payload": "^2.0.0",

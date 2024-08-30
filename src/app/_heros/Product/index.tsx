@@ -1,12 +1,15 @@
 'use client'
 
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
+import { useKeenSlider } from 'keen-slider/react'
 
 import { Category, Product } from '../../../payload/payload-types'
 import { AddToCartButton } from '../../_components/AddToCartButton'
 import { Gutter } from '../../_components/Gutter'
 import { Media } from '../../_components/Media'
 import { Price } from '../../_components/Price'
+
+import 'keen-slider/keen-slider.min.css'
 
 import classes from './index.module.scss'
 
@@ -25,6 +28,13 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     colorVariants?.[0]?.colorname,
   )
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [isImageVisible, setIsImageVisible] = useState<boolean>(false) // State for managing visibility
+
+  const [sliderRef, slider] = useKeenSlider({
+    loop: true,
+    mode: 'snap',
+    slides: { perView: 1 },
+  })
 
   // Function to extract filename from URL
   const extractFilenameFromUrl = (url: string): string | null => {
@@ -51,54 +61,59 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
 
   // Handle image selection
   const handleImageSelect = (url: string) => {
-    setSelectedImage(url)
+    setIsImageVisible(false) // Hide current image
+    setTimeout(() => {
+      setSelectedImage(url)
+      setIsImageVisible(true) // Show new image with smooth transition
+    }, 500) // Delay to match the CSS transition time
   }
 
   // Handle returning to the meta image
   const handleReturnToMetaImage = () => {
-    setSelectedImage(null)
+    setIsImageVisible(false) // Hide current image
+    setTimeout(() => {
+      setSelectedImage(null)
+      setIsImageVisible(true) // Show meta image with smooth transition
+    }, 500) // Delay to match the CSS transition time
   }
+
+  useEffect(() => {
+    setIsImageVisible(true) // Show initial image
+  }, [])
 
   return (
     <Gutter className={classes.productHero}>
       <div className={classes.mediaWrapper}>
-        {/* Meta Image */}
-        {selectedImage === null && metaImage && typeof metaImage !== 'string' && (
-          <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
-        )}
+        <div ref={sliderRef} className={`keen-slider ${classes.slider}`}>
+          {/* Meta Image */}
+          {selectedImage === null && metaImage && typeof metaImage !== 'string' && (
+            <div
+              className={`${classes.selectedImageWrapper} ${
+                isImageVisible ? classes.show : ''
+              } keen-slider__slide`}
+            >
+              <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
+            </div>
+          )}
 
-        {/* Selected Image */}
-        {selectedImage && (
-          <div className={classes.selectedImageWrapper}>
-            <img src={selectedImage} alt="Selected" className={classes.selectedImage} />
-            <button className={classes.returnButton} onClick={handleReturnToMetaImage}>
-              Return to Main Image
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Gallery Media */}
-      {galleryUrls?.length > 0 && (
-        <div className={classes.gallery}>
-          {galleryUrls.map((url, index) => (
+          {/* Gallery Images */}
+          {galleryUrls?.map((url, index) => (
             <div
               key={index}
-              className={`${classes.galleryItem} ${
-                selectedImage === url ? classes.selectedGalleryItem : ''
-              }`}
+              className={`${classes.selectedImageWrapper} ${
+                selectedImage === url && isImageVisible ? classes.show : ''
+              } keen-slider__slide`}
               onClick={() => handleImageSelect(url)}
             >
-              <img
-                src={url}
-                alt={`Gallery item ${index + 1}`}
-                className={classes.galleryThumbnail}
-              />
+              <img src={url} alt={`Gallery item ${index + 1}`} className={classes.selectedImage} />
             </div>
           ))}
         </div>
-      )}
 
+        {/* Return Button */}
+      </div>
+
+      {/* Details Section */}
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
 
