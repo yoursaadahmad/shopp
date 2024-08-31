@@ -1,6 +1,7 @@
 'use client'
 
 import React, { Fragment, useState } from 'react'
+import Zoom from 'react-medium-image-zoom'
 import { useKeenSlider } from 'keen-slider/react'
 
 import { Category, Product } from '../../../payload/payload-types'
@@ -9,8 +10,8 @@ import { Gutter } from '../../_components/Gutter'
 import { Media } from '../../_components/Media'
 import { Price } from '../../_components/Price'
 
+import 'react-medium-image-zoom/dist/styles.css'
 import 'keen-slider/keen-slider.min.css'
-import 'react-image-lightbox/style.css'
 
 import classes from './index.module.scss'
 
@@ -81,7 +82,9 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
                 isImageVisible ? classes.show : ''
               } keen-slider__slide`}
             >
-              <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
+              <Zoom>
+                <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
+              </Zoom>
             </div>
           )}
 
@@ -93,7 +96,13 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
               } keen-slider__slide`}
               onClick={() => handleImageSelect(url, index)}
             >
-              <img src={url} alt={`Gallery item ${index + 1}`} className={classes.selectedImage} />
+              <Zoom>
+                <img
+                  src={url}
+                  alt={`Gallery item ${index + 1}`}
+                  className={classes.selectedImage}
+                />
+              </Zoom>
             </div>
           ))}
         </div>
@@ -186,17 +195,16 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           </div>
         )}
-        <div className={classes.description}>
-          <h6>Description</h6>
-          <p>{description}</p>
-        </div>
-
         <AddToCartButton
           product={product}
           className={classes.addToCartButton}
           selectedSize={selectedSize}
           selectedColor={selectedColor}
         />
+        <div className={classes.description}>
+          <h6>Description</h6>
+          <p>{description}</p>
+        </div>
       </div>
     </Gutter>
   )
