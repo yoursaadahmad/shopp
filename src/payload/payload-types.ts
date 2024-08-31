@@ -419,10 +419,10 @@ export interface Product {
     | null;
   gallery?:
     | {
-        media: string,
-        caption?: string | null,
-        id?: string | null,
-    }[]
+        media?: string | Media | null;
+        caption?: string | null;
+        id?: string | null;
+      }[]
     | null;
   categories?: (string | Category)[] | null;
   relatedProducts?: (string | Product)[] | null;

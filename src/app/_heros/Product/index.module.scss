@@ -12,9 +12,9 @@
 }
 
 .mediaWrapper {
-  position: relative;
+  position: absolute;
   min-height: 400px;
-  background-color: var(--color-dark-50);
+  max-height: 500px;
   overflow: hidden; /* Ensure that any overflow content is hidden */
   padding: 0 50px; /* Add padding to ensure arrows are visible */
 
@@ -72,7 +72,7 @@
   border: none;
   padding: 10px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
   z-index: 2;
   transform: translateY(-50%);
 }
@@ -117,8 +117,7 @@
 .mediaWrapper {
   position: relative;
   min-height: 400px;
-  background-color: var(--color-dark-50);
-  overflow: hidden;
+  max-height: 500px;
   padding: 0 50px; /* Add padding to ensure arrows are visible */
 }
 

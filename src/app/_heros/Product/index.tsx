@@ -197,17 +197,16 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           </div>
         )}
-        <div className={classes.description}>
-          <h6>Description</h6>
-          <p>{description}</p>
-        </div>
-
         <AddToCartButton
           product={product}
           className={classes.addToCartButton}
           selectedSize={selectedSize}
           selectedColor={selectedColor}
         />
+        <div className={classes.description}>
+          <h6>Description</h6>
+          <p>{description}</p>
+        </div>
       </div>
     </Gutter>
   )

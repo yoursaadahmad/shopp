@@ -4175,6 +4175,7 @@ input Product_colorVariants__id_operator {
 input Product_gallery__media_operator {
   equals: String
   not_equals: String
+  exists: Boolean
 }
 
 input Product_gallery__caption_operator {
@@ -5676,6 +5677,7 @@ input versionsProduct_version__colorVariants__id_operator {
 input versionsProduct_version__gallery__media_operator {
   equals: String
   not_equals: String
+  exists: Boolean
 }
 
 input versionsProduct_version__gallery__caption_operator {
@@ -14513,7 +14515,7 @@ input mutationProduct_ColorVariantsInput {
 }
 
 input mutationProduct_GalleryInput {
-  media: String!
+  media: String
   caption: String
   id: String
 }
@@ -14561,7 +14563,7 @@ input mutationProductUpdate_ColorVariantsInput {
 }
 
 input mutationProductUpdate_GalleryInput {
-  media: String!
+  media: String
   caption: String
   id: String
 }
