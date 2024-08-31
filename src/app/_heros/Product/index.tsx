@@ -28,15 +28,19 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     colorVariants?.[0]?.colorname,
   )
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [isImageVisible, setIsImageVisible] = useState<boolean>(false) // State for managing visibility
+  const [isImageVisible, setIsImageVisible] = useState<boolean>(false)
+  const [currentSlide, setCurrentSlide] = useState<number>(0)
 
-  const [sliderRef, slider] = useKeenSlider({
+  const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
     mode: 'snap',
     slides: { perView: 1 },
+    slideChanged(s) {
+      const currentSlide = s.track.details.rel
+      setCurrentSlide(currentSlide)
+    },
   })
 
-  // Function to extract filename from URL
   const extractFilenameFromUrl = (url: string): string | null => {
     try {
       const urlObj = new URL(url)
@@ -49,9 +53,8 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     }
   }
 
-  // Generate media URLs for gallery items
   const galleryUrls = gallery?.map(item => {
-    const mediaUrl = item?.media?.url // Adjust based on actual structure
+    const mediaUrl = item?.media?.url
     if (typeof mediaUrl === 'string') {
       const filename = extractFilenameFromUrl(mediaUrl)
       return filename ? `${process.env.NEXT_PUBLIC_SERVER_URL}/media/${filename}` : ''
@@ -59,33 +62,30 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     return ''
   })
 
-  // Handle image selection
   const handleImageSelect = (url: string) => {
-    setIsImageVisible(false) // Hide current image
+    setIsImageVisible(false)
     setTimeout(() => {
       setSelectedImage(url)
-      setIsImageVisible(true) // Show new image with smooth transition
-    }, 500) // Delay to match the CSS transition time
+      setIsImageVisible(true)
+    }, 500)
   }
 
-  // Handle returning to the meta image
   const handleReturnToMetaImage = () => {
-    setIsImageVisible(false) // Hide current image
+    setIsImageVisible(false)
     setTimeout(() => {
       setSelectedImage(null)
-      setIsImageVisible(true) // Show meta image with smooth transition
-    }, 500) // Delay to match the CSS transition time
+      setIsImageVisible(true)
+    }, 500)
   }
 
   useEffect(() => {
-    setIsImageVisible(true) // Show initial image
+    setIsImageVisible(true)
   }, [])
 
   return (
     <Gutter className={classes.productHero}>
       <div className={classes.mediaWrapper}>
         <div ref={sliderRef} className={`keen-slider ${classes.slider}`}>
-          {/* Meta Image */}
           {selectedImage === null && metaImage && typeof metaImage !== 'string' && (
             <div
               className={`${classes.selectedImageWrapper} ${
@@ -96,7 +96,6 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           )}
 
-          {/* Gallery Images */}
           {galleryUrls?.map((url, index) => (
             <div
               key={index}
@@ -110,10 +109,34 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
           ))}
         </div>
 
-        {/* Return Button */}
+        {/* Left Arrow */}
+        <button
+          className={`${classes.arrow} ${classes.arrowLeft}`}
+          onClick={() => slider.current?.prev()}
+        >
+          &lt;
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          className={`${classes.arrow} ${classes.arrowRight}`}
+          onClick={() => slider.current?.next()}
+        >
+          &gt;
+        </button>
+
+        {/* Dots Navigation */}
+        <div className={classes.dotsWrapper}>
+          {galleryUrls?.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => slider.current?.moveToIdx(idx)}
+              className={`${classes.dot} ${currentSlide === idx ? classes.activeDot : ''}`}
+            ></button>
+          ))}
+        </div>
       </div>
 
-      {/* Details Section */}
       <div className={classes.details}>
         <h3 className={classes.title}>{title}</h3>
 

@@ -16,6 +16,7 @@
   min-height: 400px;
   background-color: var(--color-dark-50);
   overflow: hidden; /* Ensure that any overflow content is hidden */
+  padding: 0 50px; /* Add padding to ensure arrows are visible */
 
   @include small-break {
     min-height: 250px;
@@ -60,6 +61,67 @@
 .returnButton:hover {
   background-color: var(--color-blue-700);
 }
+
+/* Add styles for the navigation arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0.2;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 2;
+  transform: translateY(-50%);
+}
+
+.arrowLeft {
+  left: 10px;
+}
+
+.arrowRight {
+  right: 10px;
+}
+
+.arrow:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dotsWrapper {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 2;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+
+  &:hover,
+  &.activeDot {
+    background-color: white;
+  }
+}
+
+/* Adjust the mediaWrapper to accommodate arrows */
+.mediaWrapper {
+  position: relative;
+  min-height: 400px;
+  background-color: var(--color-dark-50);
+  overflow: hidden;
+  padding: 0 50px; /* Add padding to ensure arrows are visible */
+}
+
 
 .gallery {
   display: flex;
