@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Fragment, useEffect, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 
 import { Category, Product } from '../../../payload/payload-types'
@@ -10,6 +10,7 @@ import { Media } from '../../_components/Media'
 import { Price } from '../../_components/Price'
 
 import 'keen-slider/keen-slider.min.css'
+import 'react-image-lightbox/style.css'
 
 import classes from './index.module.scss'
 
@@ -19,7 +20,7 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     categories,
     sizeVariants,
     colorVariants,
-    gallery = [{}],
+    gallery = [{ ...Media }],
     meta: { image: metaImage, description } = {},
   } = product
 
@@ -62,25 +63,13 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
     return ''
   })
 
-  const handleImageSelect = (url: string) => {
-    setIsImageVisible(false)
-    setTimeout(() => {
-      setSelectedImage(url)
-      setIsImageVisible(true)
-    }, 500)
+  const handleImageSelect = (url: string, index: number) => {
+    setSelectedImage(url)
   }
 
   const handleReturnToMetaImage = () => {
-    setIsImageVisible(false)
-    setTimeout(() => {
-      setSelectedImage(null)
-      setIsImageVisible(true)
-    }, 500)
+    setSelectedImage(null)
   }
-
-  useEffect(() => {
-    setIsImageVisible(true)
-  }, [])
 
   return (
     <Gutter className={classes.productHero}>
@@ -102,7 +91,7 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
               className={`${classes.selectedImageWrapper} ${
                 selectedImage === url && isImageVisible ? classes.show : ''
               } keen-slider__slide`}
-              onClick={() => handleImageSelect(url)}
+              onClick={() => handleImageSelect(url, index)}
             >
               <img src={url} alt={`Gallery item ${index + 1}`} className={classes.selectedImage} />
             </div>
@@ -197,16 +186,17 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           </div>
         )}
+        <div className={classes.description}>
+          <h6>Description</h6>
+          <p>{description}</p>
+        </div>
+
         <AddToCartButton
           product={product}
           className={classes.addToCartButton}
           selectedSize={selectedSize}
           selectedColor={selectedColor}
         />
-        <div className={classes.description}>
-          <h6>Description</h6>
-          <p>{description}</p>
-        </div>
       </div>
     </Gutter>
   )
