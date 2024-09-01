@@ -14,7 +14,6 @@
 .mediaWrapper {
   position: absolute;
   min-height: 400px;
-  max-height: 500px;
   overflow: hidden; /* Ensure that any overflow content is hidden */
   padding: 0 50px; /* Add padding to ensure arrows are visible */
 
@@ -65,9 +64,9 @@
 /* Add styles for the navigation arrows */
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 13%;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0.2;
+  opacity: 0.3;
   color: white;
   border: none;
   padding: 10px;
@@ -75,7 +74,33 @@
   font-size: 20px;
   z-index: 2;
   transform: translateY(-50%);
+  transition: opacity 0.3s ease;
 }
+
+.arrow:hover {
+  opacity: 1;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .arrow {
+    font-size: 16px;
+    padding: 8px;
+    position: absolute;
+    top: 50%;
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .arrow {
+    font-size: 14px;
+    padding: 6px;
+  }
+}
+
+
+
 
 .arrowLeft {
   left: 10px;
@@ -91,6 +116,7 @@
 
 .dotsWrapper {
   position: absolute;
+  top: 100%;
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -117,7 +143,6 @@
 .mediaWrapper {
   position: relative;
   min-height: 400px;
-  max-height: 500px;
   padding: 0 50px; /* Add padding to ensure arrows are visible */
 }
 

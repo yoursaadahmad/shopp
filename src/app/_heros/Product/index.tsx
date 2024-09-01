@@ -1,8 +1,8 @@
 'use client'
 
 import React, { Fragment, useState } from 'react'
-import Zoom from 'react-medium-image-zoom'
 import { useKeenSlider } from 'keen-slider/react'
+import Image from 'next/image'
 
 import { Category, Product } from '../../../payload/payload-types'
 import { AddToCartButton } from '../../_components/AddToCartButton'
@@ -10,7 +10,6 @@ import { Gutter } from '../../_components/Gutter'
 import { Media } from '../../_components/Media'
 import { Price } from '../../_components/Price'
 
-import 'react-medium-image-zoom/dist/styles.css'
 import 'keen-slider/keen-slider.min.css'
 
 import classes from './index.module.scss'
@@ -82,9 +81,7 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
                 isImageVisible ? classes.show : ''
               } keen-slider__slide`}
             >
-              <Zoom>
-                <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
-              </Zoom>
+              <Media imgClassName={classes.selectedImage} resource={metaImage} fill />
             </div>
           )}
 
@@ -96,13 +93,13 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
               } keen-slider__slide`}
               onClick={() => handleImageSelect(url, index)}
             >
-              <Zoom>
-                <img
-                  src={url}
-                  alt={`Gallery item ${index + 1}`}
-                  className={classes.selectedImage}
-                />
-              </Zoom>
+              <Image
+                src={url}
+                alt={`Gallery item ${index + 1}`}
+                className={classes.selectedImage}
+                height={1000}
+                width={1000}
+              />
             </div>
           ))}
         </div>
