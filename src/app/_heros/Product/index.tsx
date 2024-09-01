@@ -31,10 +31,11 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const [isImageVisible, setIsImageVisible] = useState<boolean>(false)
   const [currentSlide, setCurrentSlide] = useState<number>(0)
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false)
 
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     loop: true,
-    mode: 'snap',
+    mode: 'free-snap',
     slides: { perView: 1 },
     slideChanged(s) {
       const currentSlide = s.track.details.rel
@@ -65,6 +66,12 @@ export const ProductHero: React.FC<{ product: Product }> = ({ product }) => {
 
   const handleImageSelect = (url: string, index: number) => {
     setSelectedImage(url)
+    setIsModalVisible(true)
+  }
+
+  const closeModal = () => {
+    setIsModalVisible(false)
+    setSelectedImage(null)
   }
 
   const handleReturnToMetaImage = () => {
