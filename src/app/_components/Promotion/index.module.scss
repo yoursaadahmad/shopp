@@ -2,7 +2,7 @@
 
 .promotion {
   display: grid;
-  grid-template-columns: 50% 1fr;
+  grid-template-columns: 100% 1fr;
   gap: 30px;
   margin-bottom: 30px;
 
@@ -13,13 +13,20 @@
 
 .title {
   font-weight: 600;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 .textBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
+  gap: 100px;
+}
+
+.text {
+  margin-top: 30px;
 }
 
 .image {

@@ -63,7 +63,8 @@
     "resend": "^3.5.0",
     "stream-browserify": "^3.0.0",
     "stripe": "^10.2.0",
-    "url": "^0.11.4"
+    "url": "^0.11.4",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^13.1.6",

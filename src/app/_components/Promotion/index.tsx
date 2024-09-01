@@ -44,7 +44,7 @@ const Promotion = () => {
         <h3 className={classes.title}>About Us</h3>
         <p></p>
         <p></p>
-        <p>
+        <p className={classes.text}>
           Welcome to IMPERIAL, your ultimate shopping destination for top-quality products at
           unbeatable prices! Our store is stocked with a wide variety of items carefully selected to
           meet your needs and exceed your expectations. Whether you're looking for the latest
